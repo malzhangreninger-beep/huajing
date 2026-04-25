@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Noto_Serif_SC, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,8 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "画境 - AI绘画灵感工作室",
-  description: "一个为艺术创作者而生的AI灵感助手，帮助您探索无限创作可能",
+  title: "画境 - AI 创作伴侣",
+  description:
+    "一个为艺术创作者服务的 AI 创作伴侣，通过向内挖掘个人母题和向外转化跨媒介输入，帮助创作者找回和深化自己的艺术语言。",
+  keywords: ["AI", "艺术", "创作", "灵感", "绘画", "油画", "创作伴侣"],
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -28,7 +36,7 @@ export default function RootLayout({
       lang="zh-CN"
       className={`${notoSerifSC.variable} ${geistMono.variable} h-full antialiased bg-background`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex font-sans">{children}</body>
     </html>
   );
 }
