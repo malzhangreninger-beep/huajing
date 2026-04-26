@@ -1,12 +1,12 @@
 import { Sidebar } from "@/components/sidebar";
-import { HomeContent } from "@/components/home-content";
+import { TransformContent } from "@/components/transform/transform-content";
 
-export default function Home() {
+export default function TransformPage() {
   return (
     <div className="flex min-h-screen w-full">
       <Sidebar />
       <main className="flex-1 overflow-y-auto">
-        <HomeContent />
+        <TransformContent />
       </main>
     </div>
   );

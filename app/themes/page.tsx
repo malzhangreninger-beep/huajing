@@ -1,12 +1,12 @@
 import { Sidebar } from "@/components/sidebar";
-import { HomeContent } from "@/components/home-content";
+import { ThemesContent } from "@/components/themes/themes-content";
 
-export default function Home() {
+export default function ThemesPage() {
   return (
     <div className="flex min-h-screen w-full">
       <Sidebar />
       <main className="flex-1 overflow-y-auto">
-        <HomeContent />
+        <ThemesContent />
       </main>
     </div>
   );
