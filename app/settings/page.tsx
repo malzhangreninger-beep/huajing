@@ -130,18 +130,57 @@ export default function SettingsPage() {
                         </label>
                       ))}
                       
-                      {/* 东方美术史 */}
+                      {/* 中国美术史 */}
                       <div className="col-span-2 mt-4 mb-2">
-                        <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">东方美术史</p>
+                        <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">中国美术史</p>
                       </div>
                       {[
-                        { id: "chinese-ancient", label: "先秦至汉", desc: "青铜器/帛画 (前2000-220)" },
-                        { id: "chinese-tang", label: "魏晋隋唐", desc: "顾恺之/吴道子 (220-907)" },
-                        { id: "chinese-song", label: "宋元", desc: "范宽/黄公望 (960-1368)" },
-                        { id: "chinese-ming", label: "明清", desc: "文徵明/八大山人 (1368-1911)" },
-                        { id: "chinese-modern", label: "近现代中国", desc: "齐白石/张大千 (1911至今)" },
-                        { id: "japanese", label: "日本美术", desc: "浮世绘/琳派/近现代" },
-                        { id: "ukiyoe", label: "浮世绘专项", desc: "葛饰北斋/歌川广重" },
+                        { id: "cn-prehistoric", label: "史前至商周", desc: "彩陶/岩画/青铜纹饰 (前6000-前771)" },
+                        { id: "cn-springautumn", label: "春秋战国", desc: "漆画/帛画/楚美术 (前770-前221)" },
+                        { id: "cn-qinhan", label: "秦汉", desc: "画像石/帛画/马王堆 (前221-220)" },
+                        { id: "cn-weijin", label: "魏晋南北朝", desc: "顾恺之/敦煌早期 (220-589)" },
+                        { id: "cn-suitang", label: "隋唐五代", desc: "阎立本/吴道子/张萱/周昉 (581-960)" },
+                        { id: "cn-northsong", label: "北宋", desc: "范宽/郭熙/李成/张择端 (960-1127)" },
+                        { id: "cn-southsong", label: "南宋", desc: "马远/夏圭/刘松年/李唐 (1127-1279)" },
+                        { id: "cn-yuan", label: "元代", desc: "赵孟頫/黄公望/倪瓒/王蒙 (1271-1368)" },
+                        { id: "cn-earlyming", label: "明初至中期", desc: "戴进/沈周/文徵明/唐寅 (1368-1550)" },
+                        { id: "cn-lateming", label: "明末", desc: "董其昌/陈洪绑/徐渭 (1550-1644)" },
+                        { id: "cn-earlyqing", label: "清初", desc: "四王/四僧/八大山人/石涛 (1644-1735)" },
+                        { id: "cn-midqing", label: "清中期", desc: "扬州八怪/郑板桥/金农 (1735-1850)" },
+                        { id: "cn-lateqing", label: "清末", desc: "任伯年/吴昌硕/虚谷 (1850-1911)" },
+                        { id: "cn-earlymodern", label: "民国", desc: "齐白石/黄宾虹/张大千/徐悲鸿 (1912-1949)" },
+                        { id: "cn-contemporary", label: "当代中国", desc: "吴冠中/赵无极/朱德群 (1949至今)" },
+                        { id: "cn-dunhuang", label: "敦煌专题", desc: "壁画/彩塑 (4-14世纪)" },
+                        { id: "cn-literati", label: "文人画专题", desc: "写意山水/花鸟/题跋" },
+                        { id: "cn-gongbi", label: "工笔画专题", desc: "院体/仕女/花鸟工笔" },
+                      ].map((period) => (
+                        <label
+                          key={period.id}
+                          className="flex items-start gap-3 p-3 bg-secondary/50 border border-border rounded-lg cursor-pointer hover:bg-secondary transition-colors"
+                        >
+                          <input
+                            type="checkbox"
+                            className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-primary/50"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-foreground">{period.label}</p>
+                            <p className="text-xs text-muted-foreground truncate">{period.desc}</p>
+                          </div>
+                        </label>
+                      ))}
+                      
+                      {/* 日本美术史 */}
+                      <div className="col-span-2 mt-4 mb-2">
+                        <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">日本美术史</p>
+                      </div>
+                      {[
+                        { id: "jp-heian", label: "平安时代", desc: "大和绘/绘卷物 (794-1185)" },
+                        { id: "jp-kamakura", label: "�的仓室町", desc: "水墨画/雪舟 (1185-1573)" },
+                        { id: "jp-momoyama", label: "桃山时代", desc: "狩野派/障壁画 (1573-1603)" },
+                        { id: "jp-edo", label: "江户时代", desc: "琳派/俵屋宗达/尾形光琳 (1603-1868)" },
+                        { id: "jp-ukiyoe", label: "浮世绘", desc: "葛饰北斋/歌川广重/喜多川歌麿" },
+                        { id: "jp-meiji", label: "明治至昭和", desc: "日本画/洋画/竹久梦二 (1868-1989)" },
+                        { id: "jp-contemporary", label: "当代日本", desc: "村上隆/奈良美智/草间弥生" },
                       ].map((period) => (
                         <label
                           key={period.id}
