@@ -169,33 +169,7 @@ export default function SettingsPage() {
                         </label>
                       ))}
                       
-                      {/* 日本美术史 */}
-                      <div className="col-span-2 mt-4 mb-2">
-                        <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">日本美术史</p>
-                      </div>
-                      {[
-                        { id: "jp-heian", label: "平安时代", desc: "大和绘/绘卷物 (794-1185)" },
-                        { id: "jp-kamakura", label: "�的仓室町", desc: "水墨画/雪舟 (1185-1573)" },
-                        { id: "jp-momoyama", label: "桃山时代", desc: "狩野派/障壁画 (1573-1603)" },
-                        { id: "jp-edo", label: "江户时代", desc: "琳派/俵屋宗达/尾形光琳 (1603-1868)" },
-                        { id: "jp-ukiyoe", label: "浮世绘", desc: "葛饰北斋/歌川广重/喜多川歌麿" },
-                        { id: "jp-meiji", label: "明治至昭和", desc: "日本画/洋画/竹久梦二 (1868-1989)" },
-                        { id: "jp-contemporary", label: "当代日本", desc: "村上隆/奈良美智/草间弥生" },
-                      ].map((period) => (
-                        <label
-                          key={period.id}
-                          className="flex items-start gap-3 p-3 bg-secondary/50 border border-border rounded-lg cursor-pointer hover:bg-secondary transition-colors"
-                        >
-                          <input
-                            type="checkbox"
-                            className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-primary/50"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-foreground">{period.label}</p>
-                            <p className="text-xs text-muted-foreground truncate">{period.desc}</p>
-                          </div>
-                        </label>
-                      ))}
+
                     </div>
                   </div>
                   <div className="flex items-center justify-between py-3">
