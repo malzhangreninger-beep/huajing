@@ -83,19 +83,81 @@ export default function SettingsPage() {
                       <option>简洁直接</option>
                     </select>
                   </div>
-                  <div className="flex items-center justify-between py-3 border-b border-border">
-                    <div>
-                      <p className="font-medium text-foreground">美术史参考偏好</p>
-                      <p className="text-sm text-muted-foreground">
-                        选择参考作品的时期范围
-                      </p>
+                  <div className="py-3 border-b border-border">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <p className="font-medium text-foreground">美术史参考偏好</p>
+                        <p className="text-sm text-muted-foreground">
+                          选择参考作品的时期范围（可多选）
+                        </p>
+                      </div>
                     </div>
-                    <select className="px-4 py-2 bg-secondary border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50">
-                      <option>全部时期</option>
-                      <option>古典主义</option>
-                      <option>现代艺术</option>
-                      <option>当代艺术</option>
-                    </select>
+                    <div className="grid grid-cols-2 gap-2">
+                      {/* 西方美术史 */}
+                      <div className="col-span-2 mb-2">
+                        <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">西方美术史</p>
+                      </div>
+                      {[
+                        { id: "ancient", label: "古代艺术", desc: "古希腊罗马 (前800-476)" },
+                        { id: "medieval", label: "中世纪", desc: "拜占庭/哥特 (476-1400)" },
+                        { id: "renaissance", label: "文艺复兴", desc: "达芬奇/米开朗基罗 (1400-1600)" },
+                        { id: "baroque", label: "巴洛克", desc: "卡拉瓦乔/伦勃朗 (1600-1750)" },
+                        { id: "rococo", label: "洛可可", desc: "华托/弗拉戈纳尔 (1700-1780)" },
+                        { id: "neoclassical", label: "新古典主义", desc: "大卫/安格尔 (1750-1850)" },
+                        { id: "romanticism", label: "浪漫主义", desc: "德拉克洛瓦/透纳 (1780-1850)" },
+                        { id: "realism", label: "现实主义", desc: "库尔贝/米勒 (1840-1880)" },
+                        { id: "impressionism", label: "印象派", desc: "莫奈/雷诺阿 (1860-1890)" },
+                        { id: "postimpressionism", label: "后印象派", desc: "梵高/塞尚/高更 (1880-1910)" },
+                        { id: "expressionism", label: "表现主义", desc: "蒙克/基尔希纳 (1905-1930)" },
+                        { id: "cubism", label: "立体主义", desc: "毕加索/布拉克 (1907-1920)" },
+                        { id: "surrealism", label: "超现实主义", desc: "达利/马格利特 (1920-1950)" },
+                        { id: "abstractexpressionism", label: "抽象表现主义", desc: "波洛克/罗斯科 (1940-1960)" },
+                        { id: "popart", label: "波普艺术", desc: "沃霍尔/利希滕斯坦 (1950-1970)" },
+                        { id: "contemporary", label: "当代艺术", desc: "1970至今" },
+                      ].map((period) => (
+                        <label
+                          key={period.id}
+                          className="flex items-start gap-3 p-3 bg-secondary/50 border border-border rounded-lg cursor-pointer hover:bg-secondary transition-colors"
+                        >
+                          <input
+                            type="checkbox"
+                            className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-primary/50"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-foreground">{period.label}</p>
+                            <p className="text-xs text-muted-foreground truncate">{period.desc}</p>
+                          </div>
+                        </label>
+                      ))}
+                      
+                      {/* 东方美术史 */}
+                      <div className="col-span-2 mt-4 mb-2">
+                        <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">东方美术史</p>
+                      </div>
+                      {[
+                        { id: "chinese-ancient", label: "先秦至汉", desc: "青铜器/帛画 (前2000-220)" },
+                        { id: "chinese-tang", label: "魏晋隋唐", desc: "顾恺之/吴道子 (220-907)" },
+                        { id: "chinese-song", label: "宋元", desc: "范宽/黄公望 (960-1368)" },
+                        { id: "chinese-ming", label: "明清", desc: "文徵明/八大山人 (1368-1911)" },
+                        { id: "chinese-modern", label: "近现代中国", desc: "齐白石/张大千 (1911至今)" },
+                        { id: "japanese", label: "日本美术", desc: "浮世绘/琳派/近现代" },
+                        { id: "ukiyoe", label: "浮世绘专项", desc: "葛饰北斋/歌川广重" },
+                      ].map((period) => (
+                        <label
+                          key={period.id}
+                          className="flex items-start gap-3 p-3 bg-secondary/50 border border-border rounded-lg cursor-pointer hover:bg-secondary transition-colors"
+                        >
+                          <input
+                            type="checkbox"
+                            className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-primary/50"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-foreground">{period.label}</p>
+                            <p className="text-xs text-muted-foreground truncate">{period.desc}</p>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
                   </div>
                   <div className="flex items-center justify-between py-3">
                     <div>
