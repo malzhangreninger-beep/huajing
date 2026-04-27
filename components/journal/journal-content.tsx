@@ -1,70 +1,92 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useTransition } from "react";
+import { createJournal } from "@/app/actions/journal";
+import { createClient } from "@/lib/supabase/client";
 import { JournalEntry } from "./journal-entry";
 import { JournalForm } from "./journal-form";
-import { JournalList } from "./journal-list";
 import { Plus, BookOpen } from "lucide-react";
 
 export interface JournalEntryData {
   id: string;
   content: string;
   tags: string[];
-  mood: number;
-  imageUrl?: string;
-  createdAt: Date;
+  mood: number | null;
+  image_urls: string[];
+  created_at: string;
+  journal_feedbacks?: Array<{
+    id: string;
+    type: string;
+    content: string;
+    metadata: Record<string, unknown>;
+  }>;
 }
 
-// 模拟数据，后续可以连接数据库
-const mockEntries: JournalEntryData[] = [
-  {
-    id: "1",
-    content: "今天在窗边看到一束光线穿过玻璃杯，折射出彩虹的颜色。让我想起莫奈画中的光影变化。",
-    tags: ["光影", "窗", "静物"],
-    mood: 4,
-    createdAt: new Date("2024-04-23"),
-  },
-  {
-    id: "2",
-    content: "读了里尔克的《秋日》，那种孤独的氛围很打动我。想尝试用冷灰色调来表达这种感觉。",
-    tags: ["诗歌", "孤独", "秋天"],
-    mood: 3,
-    createdAt: new Date("2024-04-22"),
-  },
-  {
-    id: "3",
-    content: "在公园散步时看到老人坐在长椅上，背影让我想到时间的流逝。也许可以画一个系列关于「等待」的主题。",
-    tags: ["背影", "时间", "等待"],
-    mood: 4,
-    createdAt: new Date("2024-04-21"),
-  },
-];
-
 export function JournalContent() {
-  const [entries, setEntries] = useState<JournalEntryData[]>(mockEntries);
+  const [entries, setEntries] = useState<JournalEntryData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPending, startTransition] = useTransition();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState<JournalEntryData | null>(null);
 
-  const handleAddEntry = (entry: Omit<JournalEntryData, "id" | "createdAt">) => {
-    const newEntry: JournalEntryData = {
-      ...entry,
-      id: Date.now().toString(),
-      createdAt: new Date(),
-    };
-    setEntries([newEntry, ...entries]);
-    setIsFormOpen(false);
+  const fetchEntries = async () => {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("journals")
+      .select("*, journal_feedbacks(*)")
+      .order("created_at", { ascending: false })
+      .limit(50);
+
+    if (error) {
+      console.error("读取日志失败:", error.message);
+      setEntries([]);
+    } else {
+      setEntries((data ?? []) as JournalEntryData[]);
+    }
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      fetchEntries();
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  const handleAddEntry = (entry: { content: string }) => {
+    startTransition(async () => {
+      try {
+        await createJournal(entry.content);
+        await fetchEntries();
+        setIsFormOpen(false);
+      } catch (error) {
+        console.error("保存日志失败:", error);
+      }
+    });
   };
 
   const handleDeleteEntry = (id: string) => {
-    setEntries(entries.filter((e) => e.id !== id));
+    console.log("删除功能待认证后完善");
+    setEntries(entries.filter((entry) => entry.id !== id));
     if (selectedEntry?.id === id) {
       setSelectedEntry(null);
     }
   };
 
+  const tagCount = new Set(entries.flatMap((entry) => entry.tags ?? [])).size;
+  const moodEntries = entries.filter((entry) => typeof entry.mood === "number");
+  const averageMood =
+    moodEntries.length > 0
+      ? (
+          moodEntries.reduce((sum, entry) => sum + (entry.mood ?? 0), 0) /
+          moodEntries.length
+        ).toFixed(1)
+      : "-";
+
   return (
     <div className="min-h-screen">
-      {/* Header */}
       <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border">
         <div className="flex items-center justify-between px-6 py-4 lg:px-8">
           <div className="flex items-center gap-3">
@@ -86,18 +108,20 @@ export function JournalContent() {
         </div>
       </header>
 
-      {/* Content */}
       <div className="p-6 lg:p-8">
         {isFormOpen && (
           <div className="mb-8 animate-slide-up">
             <JournalForm
               onSubmit={handleAddEntry}
               onCancel={() => setIsFormOpen(false)}
+              isSubmitting={isPending}
             />
           </div>
         )}
 
-        {entries.length === 0 ? (
+        {isLoading ? (
+          <div className="text-center py-20 text-muted-foreground">加载中...</div>
+        ) : entries.length === 0 ? (
           <div className="text-center py-20">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-secondary flex items-center justify-center">
               <BookOpen className="w-8 h-8 text-muted-foreground" />
@@ -134,24 +158,19 @@ export function JournalContent() {
         )}
       </div>
 
-      {/* Stats Footer */}
       {entries.length > 0 && (
         <div className="sticky bottom-0 bg-card border-t border-border px-6 py-4">
           <div className="flex items-center justify-center gap-8 text-sm">
             <div className="text-muted-foreground">
-              共 <span className="text-foreground font-medium">{entries.length}</span> 条记录
+              共 <span className="text-foreground font-medium">{entries.length}</span>{" "}
+              条记录
             </div>
             <div className="text-muted-foreground">
-              <span className="text-foreground font-medium">
-                {new Set(entries.flatMap((e) => e.tags)).size}
-              </span>{" "}
-              个标签
+              <span className="text-foreground font-medium">{tagCount}</span> 个标签
             </div>
             <div className="text-muted-foreground">
               平均情绪{" "}
-              <span className="text-foreground font-medium">
-                {(entries.reduce((sum, e) => sum + e.mood, 0) / entries.length).toFixed(1)}
-              </span>
+              <span className="text-foreground font-medium">{averageMood}</span>
             </div>
           </div>
         </div>

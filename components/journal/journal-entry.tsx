@@ -19,29 +19,35 @@ const moodColors = [
 ];
 
 export function JournalEntry({ entry, onDelete }: JournalEntryProps) {
-  const formatDate = (date: Date) => {
+  const formatTime = (date: string) => {
     return new Intl.DateTimeFormat("zh-CN", {
-      month: "long",
-      day: "numeric",
-      weekday: "short",
-    }).format(date);
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(new Date(date));
   };
+
+  const mood = entry.mood ?? 0;
+  const firstFeedback = entry.journal_feedbacks?.[0];
 
   return (
     <article className="group bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300">
-      {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-2">
           <time className="text-sm text-muted-foreground">
-            {formatDate(entry.createdAt)}
+            {formatTime(entry.created_at)}
           </time>
-          <span className="text-border">·</span>
-          <div className="flex items-center gap-1.5">
-            <Heart className={`w-3.5 h-3.5 ${moodColors[entry.mood]} text-white rounded-full p-0.5`} />
-            <span className="text-xs text-muted-foreground">
-              {moodLabels[entry.mood]}
-            </span>
-          </div>
+          {entry.mood && (
+            <>
+              <span className="text-border">·</span>
+              <div className="flex items-center gap-1.5">
+                <Heart className={`w-3.5 h-3.5 ${moodColors[mood]} text-white rounded-full p-0.5`} />
+                <span className="text-xs text-muted-foreground">
+                  {moodLabels[mood]}
+                </span>
+              </div>
+            </>
+          )}
         </div>
         <button
           onClick={onDelete}
@@ -52,23 +58,26 @@ export function JournalEntry({ entry, onDelete }: JournalEntryProps) {
         </button>
       </div>
 
-      {/* Content */}
       <p className="text-foreground leading-relaxed mb-4 text-sm">
         {entry.content}
       </p>
 
-      {/* Image if exists */}
-      {entry.imageUrl && (
+      {firstFeedback && (
+        <p className="mt-2 mb-4 text-[0.85rem] italic leading-relaxed text-[#a09173]">
+          ✦ {firstFeedback.content}
+        </p>
+      )}
+
+      {entry.image_urls?.[0] && (
         <div className="mb-4 rounded-lg overflow-hidden border border-border">
           <img
-            src={entry.imageUrl}
+            src={entry.image_urls[0]}
             alt="附图"
             className="w-full h-40 object-cover"
           />
         </div>
       )}
 
-      {/* Tags */}
       {entry.tags.length > 0 && (
         <div className="flex items-center gap-2 flex-wrap">
           <Tag className="w-3.5 h-3.5 text-muted-foreground" />

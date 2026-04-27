@@ -1,7 +1,43 @@
-import { streamText, convertToModelMessages } from "ai";
+import OpenAI from "openai";
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 
-export async function POST(req: Request) {
-  const { messages, inputType } = await req.json();
+const client = new OpenAI({
+  apiKey: process.env.DEEPSEEK_API_KEY,
+  baseURL: process.env.DEEPSEEK_BASE_URL,
+});
+
+type TransformMessage = {
+  role?: string;
+  content?: unknown;
+  parts?: Array<{
+    type?: string;
+    text?: string;
+  }>;
+};
+
+function getMessageContent(message: TransformMessage | undefined) {
+  if (!message) {
+    return "";
+  }
+
+  if (typeof message.content === "string") {
+    return message.content;
+  }
+
+  if (Array.isArray(message.parts)) {
+    return message.parts
+      .filter((part) => part.type === "text" && typeof part.text === "string")
+      .map((part) => part.text)
+      .join("\n");
+  }
+
+  return "";
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const { messages, inputType } = await req.json();
 
   const systemPrompt = `你是「画境」的 AI 艺术顾问，专门帮助艺术创作者将跨媒介的灵感转化为可执行的绘画创作方案。
 
@@ -39,13 +75,85 @@ export async function POST(req: Request) {
 - 引导他们做出创作决定
 - 留出创作的空间`;
 
-  const modelMessages = await convertToModelMessages(messages);
+    const lastUserMessage = Array.isArray(messages)
+      ? [...messages].reverse().find((message: TransformMessage) => message.role === "user")
+      : undefined;
+    const userContent = getMessageContent(lastUserMessage);
 
-  const result = streamText({
-    model: "openai/gpt-4o",
-    system: systemPrompt,
-    messages: modelMessages,
-  });
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
 
-  return result.toUIMessageStreamResponse();
+    const { data: journals } = await supabase
+      .from("journals")
+      .select("content, created_at, journal_feedbacks(content)")
+      .order("created_at", { ascending: false })
+      .limit(30);
+
+    const { data: feedbacks } = await supabase
+      .from("journal_feedbacks")
+      .select("content, metadata")
+      .eq("type", "word_frequency")
+      .order("created_at", { ascending: false })
+      .limit(50);
+
+    const journalSummary =
+      journals && journals.length > 0
+        ? journals
+            .map(
+              (journal, index) =>
+                `${index + 1}. ${journal.content.slice(0, 100)}${
+                  journal.content.length > 100 ? "..." : ""
+                }`
+            )
+            .join("\n")
+        : "暂无日志记录";
+
+    const imageWords =
+      feedbacks && feedbacks.length > 0
+        ? feedbacks
+            .map((feedback) => feedback.metadata?.word)
+            .filter(Boolean)
+            .slice(0, 20)
+            .join("、")
+        : "暂无记录";
+
+    const userContext =
+      journals && journals.length > 0
+        ? `【这位创作者的背景】
+最近 ${journals.length} 条创作日志摘要：
+${journalSummary}
+
+AI 已识别出的高频意象词：${imageWords || "暂无"}
+
+请结合以上背景，给出专属于这位创作者的方案。不要泛泛而谈，要引用他的具体日志内容和意象词。`
+        : "";
+
+    const fullSystemPrompt = systemPrompt + (userContext ? "\n\n" + userContext : "");
+
+    const completion = await client.chat.completions.create({
+      model: "deepseek-chat",
+      messages: [
+        {
+          role: "system",
+          content: fullSystemPrompt,
+        },
+        {
+          role: "user",
+          content: userContent,
+        },
+      ],
+    });
+
+    const content = completion.choices[0]?.message.content ?? "";
+
+    return NextResponse.json({ reply: content });
+  } catch (error) {
+    console.error("Transform API 调用出错:", error);
+    return NextResponse.json(
+      { error: "AI 服务暂时不可用,请稍后再试" },
+      { status: 500 }
+    );
+  }
 }

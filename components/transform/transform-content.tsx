@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
+import { saveMessage, getConversations, clearConversations } from "@/app/actions/transform";
 import {
   Sparkles,
   Send,
@@ -13,6 +12,12 @@ import {
   Loader2,
 } from "lucide-react";
 import { TransformResult } from "./transform-result";
+
+type TransformMessage = {
+  role: "user" | "assistant";
+  content: string;
+  id?: string;
+};
 
 const inputTypes = [
   {
@@ -41,16 +46,25 @@ const inputTypes = [
 export function TransformContent() {
   const [selectedType, setSelectedType] = useState(inputTypes[0]);
   const [inputValue, setInputValue] = useState("");
+  const [messages, setMessages] = useState<TransformMessage[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { messages, sendMessage, status, setMessages } = useChat({
-    transport: new DefaultChatTransport({
-      api: "/api/transform",
-      body: { inputType: selectedType.label },
-    }),
-  });
+  useEffect(() => {
+    const loadHistory = async () => {
+      const history = await getConversations();
+      if (history.length > 0) {
+        setMessages(history.map((item) => ({
+          id: item.id,
+          role: item.role as "user" | "assistant",
+          content: item.content,
+        })));
+      }
+    };
 
-  const isLoading = status === "streaming" || status === "submitted";
+    loadHistory();
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,17 +74,48 @@ export function TransformContent() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
 
-    sendMessage({ text: inputValue });
+    const userMessage = inputValue.trim();
     setInputValue("");
+    setIsLoading(true);
+    setError("");
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+
+    try {
+      await saveMessage("user", userMessage, selectedType.label);
+
+      const response = await fetch("/api/transform", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [{ role: "user", content: userMessage }],
+          inputType: selectedType.label,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
+        await saveMessage("assistant", data.reply, selectedType.label);
+      }
+    } catch {
+      setError("请求失败，请稍后再试");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleClear = () => {
+  const handleClear = async () => {
     setMessages([]);
     setInputValue("");
+    setError("");
+    await clearConversations();
   };
 
   return (
@@ -91,7 +136,7 @@ export function TransformContent() {
           </div>
           {messages.length > 0 && (
             <button
-              onClick={handleClear}
+              onClick={() => handleClear()}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               清空对话
@@ -181,7 +226,7 @@ export function TransformContent() {
             <div className="max-w-3xl mx-auto space-y-6">
               {messages.map((message, index) => (
                 <div
-                  key={message.id}
+                  key={`${message.role}-${index}`}
                   className={`animate-fade-in ${
                     message.role === "user" ? "flex justify-end" : ""
                   }`}
@@ -190,26 +235,21 @@ export function TransformContent() {
                   {message.role === "user" ? (
                     <div className="max-w-lg bg-primary/10 border border-primary/30 rounded-xl px-5 py-4">
                       <p className="text-foreground whitespace-pre-wrap">
-                        {message.parts
-                          ?.filter((p) => p.type === "text")
-                          .map((p) => p.text)
-                          .join("") || ""}
+                        {message.content}
                       </p>
                     </div>
                   ) : (
                     <TransformResult
-                      content={
-                        message.parts
-                          ?.filter((p) => p.type === "text")
-                          .map((p) => p.text)
-                          .join("") || ""
-                      }
+                      content={message.content}
                       isStreaming={isLoading && index === messages.length - 1}
                     />
                   )}
                 </div>
               ))}
               <div ref={messagesEndRef} />
+              {error && (
+                <p className="text-sm text-destructive text-center">{error}</p>
+              )}
             </div>
           </div>
         )}

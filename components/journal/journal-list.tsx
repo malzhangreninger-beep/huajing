@@ -11,7 +11,7 @@ interface JournalListProps {
 export function JournalList({ entries, onDelete }: JournalListProps) {
   // Group entries by date
   const groupedEntries = entries.reduce((groups, entry) => {
-    const dateKey = entry.createdAt.toLocaleDateString("zh-CN", {
+    const dateKey = new Date(entry.created_at).toLocaleDateString("zh-CN", {
       year: "numeric",
       month: "long",
     });

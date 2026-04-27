@@ -5,8 +5,9 @@ import { X, Plus, Image as ImageIcon } from "lucide-react";
 import type { JournalEntryData } from "./journal-content";
 
 interface JournalFormProps {
-  onSubmit: (entry: Omit<JournalEntryData, "id" | "createdAt">) => void;
+  onSubmit: (entry: Pick<JournalEntryData, "content" | "tags" | "mood">) => void;
   onCancel: () => void;
+  isSubmitting?: boolean;
 }
 
 const moodOptions = [
@@ -22,7 +23,7 @@ const suggestedTags = [
   "情绪", "孤独", "温暖", "时间", "记忆", "梦境",
 ];
 
-export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
+export function JournalForm({ onSubmit, onCancel, isSubmitting = false }: JournalFormProps) {
   const [content, setContent] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
@@ -184,10 +185,10 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
         </button>
         <button
           type="submit"
-          disabled={!content.trim()}
+          disabled={!content.trim() || isSubmitting}
           className="px-6 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          保存记录
+          {isSubmitting ? "保存中..." : "保存记录"}
         </button>
       </div>
     </form>
