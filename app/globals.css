@@ -1,37 +1,66 @@
 @import "tailwindcss";
 
 :root {
-  /* Clément Serveau 静物画褪色温暖配色 */
-  --background: #ede6ce;          /* 暖米白画布 */
-  --foreground: #4a3a25;          /* 温暖深棕，柔和的轮廓 */
-  --card: #f2edd8;                /* 卡片底色，比背景亮一档 */
-  --card-foreground: #4a3a25;
-  --primary: #a8b398;             /* 褪色鼠尾草绿，画中桌面 */
-  --primary-foreground: #4a3a25;
-  --secondary: #e3dcc1;           /* 略深米色 */
-  --secondary-foreground: #4a3a25;
-  --muted: #e8e1c5;
-  --muted-foreground: #7a6850;    /* 中褐色文字 */
-  --accent: #b5805a;              /* 褪色赭土橙，画中吉他 */
-  --accent-foreground: #f2edd8;
-  --tertiary: #90a5ac;            /* 雾蓝灰，画中桌面 */
-  --tertiary-foreground: #4a3a25;
-  --quaternary: #d4ab94;          /* 藕粉桃色，画中花卉 */
-  --quaternary-foreground: #4a3a25;
-  --quote-bg: #d4b97a;            /* 褪色暖黄 */
-  --quote-foreground: #4a3a25;
-  --border: #8b7355;              /* 中褐描边，比深棕柔和 */
-  --ring: #a8b398;
-  --radius: 0.25rem;
-  --destructive: #a85a4a;
-  --destructive-foreground: #f2edd8;
+  /* Clément Serveau 静物画 · 褪色油彩配色 */
+  /* 画布底色 —— 像久放的亚麻油画布 */
+  --background: #e6dcbe;
+  --foreground: #3a2d1a;          /* 深暖棕，画里的轮廓线 */
 
-  /* 侧边栏：温暖深棕，但比之前的纯深棕柔和 */
-  --sidebar: #4a3a25;
-  --sidebar-foreground: #ede6ce;
+  /* 卡片底色 —— 像奶油色瓷壶 */
+  --card: #eee5cb;
+  --card-foreground: #3a2d1a;
+
+  /* 主色调 —— 褪色鼠尾草绿（画里的桌面） */
+  --primary: #9cab89;
+  --primary-foreground: #f0e7cf;
+
+  /* 次要 —— 略深的米色 */
+  --secondary: #ddd2b3;
+  --secondary-foreground: #3a2d1a;
+
+  /* 弱化 */
+  --muted: #ded3b6;
+  --muted-foreground: #6e5a3d;
+
+  /* 强调 —— 褪色赭土橙（画里的吉他） */
+  --accent: #b07246;
+  --accent-foreground: #f0e7cf;
+
+  /* 第三色 —— 雾蓝灰（画里的桌沿） */
+  --tertiary: #8ea1a8;
+  --tertiary-foreground: #f0e7cf;
+
+  /* 第四色 —— 藕粉桃（画里的花卉） */
+  --quaternary: #c99780;
+  --quaternary-foreground: #3a2d1a;
+
+  /* 第五色 —— 雾紫灰（画里的褶皱布料） */
+  --quinary: #a29ca8;
+  --quinary-foreground: #f0e7cf;
+
+  /* 引用块 —— 褪色芥末黄（画里的背景区） */
+  --quote-bg: #c9b05a;
+  --quote-foreground: #3a2d1a;
+
+  /* 宝蓝 —— 极少使用的视觉锚点（画里的小色斑） */
+  --royal: #2b4280;
+  --royal-foreground: #f0e7cf;
+
+  /* 描边 —— 温暖中褐，比纯黑柔和 */
+  --border: #7a6240;
+  --border-soft: #a08866;
+  --ring: #b07246;
+  --radius: 0.25rem;
+
+  --destructive: #a85a4a;
+  --destructive-foreground: #f0e7cf;
+
+  /* 侧边栏 —— 像画里物体投下的深褐影子 */
+  --sidebar: #3a2d1a;
+  --sidebar-foreground: #e6dcbe;
   --sidebar-muted: #8b7355;
-  --sidebar-active: #a8b398;
-  --sidebar-border: #6b5740;
+  --sidebar-active: #c9b05a;
+  --sidebar-border: #5a4830;
 }
 
 @theme inline {
@@ -51,9 +80,14 @@
   --color-tertiary-foreground: var(--tertiary-foreground);
   --color-quaternary: var(--quaternary);
   --color-quaternary-foreground: var(--quaternary-foreground);
+  --color-quinary: var(--quinary);
+  --color-quinary-foreground: var(--quinary-foreground);
   --color-quote-bg: var(--quote-bg);
   --color-quote-foreground: var(--quote-foreground);
+  --color-royal: var(--royal);
+  --color-royal-foreground: var(--royal-foreground);
   --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
@@ -80,39 +114,35 @@ body {
   font-family: var(--font-sans);
 }
 
-/* 全站去除阴影 */
+/* 全站去除阴影 —— 像油画一样平面 */
 *,
 *::before,
 *::after {
   box-shadow: none !important;
 }
 
-/* 自定义滚动条 */
+/* 滚动条 */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--border-soft);
   border-radius: 3px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
+  background: var(--border);
 }
 
-/* 优雅的文字选中 */
 ::selection {
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
 
-/* 输入框：卡片底色 + 1.5px 中褐描边，柔和轮廓感 */
+/* 输入框 */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -137,53 +167,48 @@ select:focus {
   border-color: var(--accent) !important;
 }
 
-/* 复选框样式 */
 input[type="checkbox"] {
   accent-color: var(--primary);
 }
 
-/* Fade in 动画 */
+/* 油画式画框 —— 卡片的双层描边，像画里物体的轮廓有内外两道笔触 */
+.painted-frame {
+  border: 1.5px solid var(--border);
+  position: relative;
+}
+.painted-frame::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--border-soft);
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.5;
+}
+
+/* 颜料肌理 —— 极淡的颗粒感，模拟画布纹理 */
+.canvas-texture {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(122, 98, 64, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(122, 98, 64, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(176, 114, 70, 0.02) 0%, transparent 50%);
+}
+
+/* 动画 */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
 
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-/* Slide up 动画 */
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+.animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
 
-.animate-slide-up {
-  animation: slideUp 0.5s ease-out forwards;
-}
-
-/* Pulse subtle 动画 */
 @keyframes pulseSoft {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
-
-.animate-pulse-soft {
-  animation: pulseSoft 2s ease-in-out infinite;
-}
+.animate-pulse-soft { animation: pulseSoft 2.4s ease-in-out infinite; }
