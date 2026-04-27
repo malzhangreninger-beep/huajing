@@ -10,7 +10,7 @@ const features = [
       "记录每日灵感碎片——看到的、想到的、感受到的。AI 会帮你发现反复出现的母题和意象。",
     icon: BookOpen,
     href: "/journal",
-    bg: "bg-primary",
+    iconBg: "bg-primary",
   },
   {
     title: "灵感转换",
@@ -18,7 +18,7 @@ const features = [
       "输入一首诗、一段记忆、一个概念，获得构图建议、色调方案、美术史参考。",
     icon: Sparkles,
     href: "/transform",
-    bg: "bg-accent",
+    iconBg: "bg-accent",
   },
   {
     title: "母题画廊",
@@ -26,7 +26,7 @@ const features = [
       "AI 分析你的创作日志，识别你的艺术语言、情绪基调、关注的哲学命题。",
     icon: Palette,
     href: "/themes",
-    bg: "bg-tertiary",
+    iconBg: "bg-tertiary",
   },
 ];
 
@@ -62,15 +62,18 @@ export function HomeContent() {
           </p>
         </div>
 
-        {/* Quote Card - 暖黄色平涂 */}
+        {/* Quote Card - 褪色暖黄 */}
         <div
-          className="relative rounded p-10 mb-12 border-[3px] border-foreground"
-          style={{ backgroundColor: "var(--quote-bg)" }}
+          className="relative rounded p-10 mb-12"
+          style={{
+            backgroundColor: "var(--quote-bg)",
+            border: "1.5px solid var(--border)",
+          }}
         >
           <Quote
-            className="absolute top-5 left-5 w-14 h-14"
+            className="absolute top-5 left-5 w-12 h-12 opacity-60"
             style={{ color: "var(--quote-foreground)" }}
-            strokeWidth={2.5}
+            strokeWidth={2}
           />
           <blockquote className="text-center pt-4">
             <p
@@ -80,7 +83,7 @@ export function HomeContent() {
               「{randomQuote.text}」
             </p>
             <cite
-              className="text-sm not-italic"
+              className="text-sm not-italic opacity-80"
               style={{ color: "var(--quote-foreground)" }}
             >
               —— {randomQuote.author}
@@ -89,7 +92,7 @@ export function HomeContent() {
         </div>
       </div>
 
-      {/* Features Grid - 大色块平涂 */}
+      {/* Features Grid - 统一米白卡片，色彩仅在图标处点缀 */}
       <div className="max-w-5xl mx-auto">
         <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-6 text-center">
           开始创作之旅
@@ -105,18 +108,22 @@ export function HomeContent() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div
-                  className={`relative h-full ${feature.bg} border-[3px] border-foreground rounded p-6 transition-all duration-300 hover:brightness-95`}
+                  className="relative h-full bg-card rounded p-6 transition-all duration-300 hover:bg-secondary"
+                  style={{ border: "1.5px solid var(--border)" }}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="p-3 rounded bg-background border-[3px] border-foreground">
+                    <div
+                      className={`p-3 rounded ${feature.iconBg}`}
+                      style={{ border: "1.5px solid var(--border)" }}
+                    >
                       <Icon className="w-6 h-6 text-foreground" />
                     </div>
-                    <ArrowRight className="w-6 h-6 text-background group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all" />
                   </div>
-                  <h3 className="text-lg font-semibold text-background mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-background/90 leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -131,7 +138,10 @@ export function HomeContent() {
         className="max-w-3xl mx-auto mt-20 text-center animate-fade-in"
         style={{ animationDelay: "400ms" }}
       >
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border-2 border-foreground mb-6">
+        <div
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card mb-6"
+          style={{ border: "1.5px solid var(--border)" }}
+        >
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
           <span className="text-xs text-foreground">设计理念</span>
         </div>

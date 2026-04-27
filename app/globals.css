@@ -1,37 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  /* 法国后印象派静物画配色 */
-  --background: #f0ecd8;          /* 暖米白，像画布底色 */
-  --foreground: #2c2010;          /* 深暖棕，物体轮廓线 */
-  --card: #f0ecd8;                /* 卡片底色 = 主背景 */
-  --card-foreground: #2c2010;
-  --primary: #8b9e7a;             /* 鼠尾草绿 */
-  --primary-foreground: #f0ecd8;
-  --secondary: #e8e2c8;           /* 略深米色 */
-  --secondary-foreground: #2c2010;
-  --muted: #e8e2c8;
-  --muted-foreground: #6a5a45;    /* 棕褐色文字 */
-  --accent: #c4843c;              /* 赭石橙，强调色 */
-  --accent-foreground: #f0ecd8;
-  --tertiary: #7a8fa0;            /* 灰蓝，辅助色 */
-  --tertiary-foreground: #f0ecd8;
-  --quaternary: #c4a090;          /* 藕粉，点缀色 */
-  --quaternary-foreground: #2c2010;
-  --quote-bg: #d4b85a;            /* 暖黄，引用块底色 */
-  --quote-foreground: #2c2010;
-  --border: #2c2010;              /* 描边深棕 */
-  --ring: #8b9e7a;
-  --radius: 0.25rem;              /* 4px 圆角 */
-  --destructive: #b54040;
-  --destructive-foreground: #f0ecd8;
+  /* Clément Serveau 静物画褪色温暖配色 */
+  --background: #ede6ce;          /* 暖米白画布 */
+  --foreground: #4a3a25;          /* 温暖深棕，柔和的轮廓 */
+  --card: #f2edd8;                /* 卡片底色，比背景亮一档 */
+  --card-foreground: #4a3a25;
+  --primary: #a8b398;             /* 褪色鼠尾草绿，画中桌面 */
+  --primary-foreground: #4a3a25;
+  --secondary: #e3dcc1;           /* 略深米色 */
+  --secondary-foreground: #4a3a25;
+  --muted: #e8e1c5;
+  --muted-foreground: #7a6850;    /* 中褐色文字 */
+  --accent: #b5805a;              /* 褪色赭土橙，画中吉他 */
+  --accent-foreground: #f2edd8;
+  --tertiary: #90a5ac;            /* 雾蓝灰，画中桌面 */
+  --tertiary-foreground: #4a3a25;
+  --quaternary: #d4ab94;          /* 藕粉桃色，画中花卉 */
+  --quaternary-foreground: #4a3a25;
+  --quote-bg: #d4b97a;            /* 褪色暖黄 */
+  --quote-foreground: #4a3a25;
+  --border: #8b7355;              /* 中褐描边，比深棕柔和 */
+  --ring: #a8b398;
+  --radius: 0.25rem;
+  --destructive: #a85a4a;
+  --destructive-foreground: #f2edd8;
 
-  /* 侧边栏专用变量 */
-  --sidebar: #2c2010;
-  --sidebar-foreground: #f0ecd8;
-  --sidebar-muted: #6a5a45;
-  --sidebar-active: #8b9e7a;
-  --sidebar-border: #6a5a45;
+  /* 侧边栏：温暖深棕，但比之前的纯深棕柔和 */
+  --sidebar: #4a3a25;
+  --sidebar-foreground: #ede6ce;
+  --sidebar-muted: #8b7355;
+  --sidebar-active: #a8b398;
+  --sidebar-border: #6b5740;
 }
 
 @theme inline {
@@ -63,7 +63,6 @@
   --color-sidebar-active: var(--sidebar-active);
   --color-sidebar-border: var(--sidebar-border);
 
-  /* 全局圆角统一为 4px */
   --radius-sm: 0.25rem;
   --radius-md: 0.25rem;
   --radius-lg: 0.25rem;
@@ -99,7 +98,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted-foreground);
+  background: var(--border);
   border-radius: 3px;
 }
 
@@ -113,7 +112,7 @@ body {
   color: var(--primary-foreground);
 }
 
-/* 输入框统一样式：米白底 + 2px 深棕描边 */
+/* 输入框：卡片底色 + 1.5px 中褐描边，柔和轮廓感 */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -121,8 +120,8 @@ input[type="search"],
 input[type="number"],
 textarea,
 select {
-  background-color: var(--background) !important;
-  border: 2px solid var(--foreground) !important;
+  background-color: var(--card) !important;
+  border: 1.5px solid var(--border) !important;
   border-radius: 0.25rem !important;
   color: var(--foreground);
 }
@@ -135,13 +134,12 @@ input[type="number"]:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--primary) !important;
+  border-color: var(--accent) !important;
 }
 
 /* 复选框样式 */
 input[type="checkbox"] {
   accent-color: var(--primary);
-  border-color: var(--foreground) !important;
 }
 
 /* Fade in 动画 */
