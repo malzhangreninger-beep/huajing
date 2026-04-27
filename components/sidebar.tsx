@@ -71,8 +71,8 @@ export function Sidebar() {
             className="flex items-center gap-3 group"
             onClick={() => setIsOpen(false)}
           >
-            <div className="w-10 h-10 rounded bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground text-xl font-semibold">
+            <div className="w-10 h-10 rounded bg-accent border-[3px] border-foreground flex items-center justify-center">
+              <span className="text-background text-xl font-semibold">
                 画
               </span>
             </div>

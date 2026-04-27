@@ -10,8 +10,7 @@ const features = [
       "记录每日灵感碎片——看到的、想到的、感受到的。AI 会帮你发现反复出现的母题和意象。",
     icon: BookOpen,
     href: "/journal",
-    iconBg: "bg-primary",
-    iconColor: "text-primary-foreground",
+    bg: "bg-primary",
   },
   {
     title: "灵感转换",
@@ -19,8 +18,7 @@ const features = [
       "输入一首诗、一段记忆、一个概念，获得构图建议、色调方案、美术史参考。",
     icon: Sparkles,
     href: "/transform",
-    iconBg: "bg-accent",
-    iconColor: "text-accent-foreground",
+    bg: "bg-accent",
   },
   {
     title: "母题画廊",
@@ -28,8 +26,7 @@ const features = [
       "AI 分析你的创作日志，识别你的艺术语言、情绪基调、关注的哲学命题。",
     icon: Palette,
     href: "/themes",
-    iconBg: "bg-tertiary",
-    iconColor: "text-tertiary-foreground",
+    bg: "bg-tertiary",
   },
 ];
 
@@ -65,21 +62,34 @@ export function HomeContent() {
           </p>
         </div>
 
-        {/* Quote */}
-        <div className="relative bg-secondary border-2 border-foreground rounded p-8 mb-12">
-          <Quote className="absolute top-4 left-4 w-8 h-8 text-accent/40" />
-          <blockquote className="text-center">
-            <p className="text-xl text-foreground italic mb-4 leading-relaxed">
+        {/* Quote Card - 暖黄色平涂 */}
+        <div
+          className="relative rounded p-10 mb-12 border-[3px] border-foreground"
+          style={{ backgroundColor: "var(--quote-bg)" }}
+        >
+          <Quote
+            className="absolute top-5 left-5 w-14 h-14"
+            style={{ color: "var(--quote-foreground)" }}
+            strokeWidth={2.5}
+          />
+          <blockquote className="text-center pt-4">
+            <p
+              className="text-xl italic mb-4 leading-relaxed font-medium"
+              style={{ color: "var(--quote-foreground)" }}
+            >
               「{randomQuote.text}」
             </p>
-            <cite className="text-sm text-muted-foreground">
+            <cite
+              className="text-sm not-italic"
+              style={{ color: "var(--quote-foreground)" }}
+            >
               —— {randomQuote.author}
             </cite>
           </blockquote>
         </div>
       </div>
 
-      {/* Features Grid */}
+      {/* Features Grid - 大色块平涂 */}
       <div className="max-w-5xl mx-auto">
         <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-6 text-center">
           开始创作之旅
@@ -94,19 +104,19 @@ export function HomeContent() {
                 className="group animate-slide-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="relative h-full bg-card border-2 border-foreground rounded p-6 transition-all duration-300 hover:bg-secondary">
+                <div
+                  className={`relative h-full ${feature.bg} border-[3px] border-foreground rounded p-6 transition-all duration-300 hover:brightness-95`}
+                >
                   <div className="flex items-start justify-between mb-4">
-                    <div
-                      className={`p-3 rounded ${feature.iconBg} border-2 border-foreground`}
-                    >
-                      <Icon className={`w-6 h-6 ${feature.iconColor}`} />
+                    <div className="p-3 rounded bg-background border-[3px] border-foreground">
+                      <Icon className="w-6 h-6 text-foreground" />
                     </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-6 h-6 text-background group-hover:translate-x-1 transition-all" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <h3 className="text-lg font-semibold text-background mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-background/90 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

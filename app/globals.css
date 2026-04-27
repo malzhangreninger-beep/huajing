@@ -18,6 +18,8 @@
   --tertiary-foreground: #f0ecd8;
   --quaternary: #c4a090;          /* 藕粉，点缀色 */
   --quaternary-foreground: #2c2010;
+  --quote-bg: #d4b85a;            /* 暖黄，引用块底色 */
+  --quote-foreground: #2c2010;
   --border: #2c2010;              /* 描边深棕 */
   --ring: #8b9e7a;
   --radius: 0.25rem;              /* 4px 圆角 */
@@ -49,6 +51,8 @@
   --color-tertiary-foreground: var(--tertiary-foreground);
   --color-quaternary: var(--quaternary);
   --color-quaternary-foreground: var(--quaternary-foreground);
+  --color-quote-bg: var(--quote-bg);
+  --color-quote-foreground: var(--quote-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
