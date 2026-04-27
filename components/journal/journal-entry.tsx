@@ -11,11 +11,11 @@ interface JournalEntryProps {
 const moodLabels = ["", "低落", "一般", "平静", "愉悦", "兴奋"];
 const moodColors = [
   "",
-  "bg-gray-500",
-  "bg-blue-500",
-  "bg-teal-500",
-  "bg-amber-500",
-  "bg-rose-500",
+  "bg-muted-foreground",
+  "bg-tertiary",
+  "bg-primary",
+  "bg-accent",
+  "bg-quaternary",
 ];
 
 export function JournalEntry({ entry, onDelete }: JournalEntryProps) {
@@ -28,7 +28,7 @@ export function JournalEntry({ entry, onDelete }: JournalEntryProps) {
   };
 
   return (
-    <article className="group bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300">
+    <article className="group bg-card border-2 border-foreground rounded p-5 hover:bg-secondary transition-all duration-300">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -59,7 +59,7 @@ export function JournalEntry({ entry, onDelete }: JournalEntryProps) {
 
       {/* Image if exists */}
       {entry.imageUrl && (
-        <div className="mb-4 rounded-lg overflow-hidden border border-border">
+        <div className="mb-4 rounded overflow-hidden border-2 border-foreground">
           <img
             src={entry.imageUrl}
             alt="附图"
@@ -75,7 +75,7 @@ export function JournalEntry({ entry, onDelete }: JournalEntryProps) {
           {entry.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer"
+              className="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground border border-foreground/30 hover:bg-primary hover:text-primary-foreground hover:border-foreground transition-colors cursor-pointer"
             >
               {tag}
             </span>

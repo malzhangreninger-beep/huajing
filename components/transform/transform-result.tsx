@@ -10,25 +10,25 @@ interface TransformResultProps {
 
 export function TransformResult({ content, isStreaming }: TransformResultProps) {
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="bg-card border-2 border-foreground rounded overflow-hidden">
       {/* Header */}
-      <div className="flex items-center gap-2 px-5 py-3 border-b border-border bg-secondary/30">
-        <Sparkles className="w-4 h-4 text-purple-500" />
+      <div className="flex items-center gap-2 px-5 py-3 border-b-2 border-foreground bg-secondary">
+        <Sparkles className="w-4 h-4 text-accent" />
         <span className="text-sm font-medium text-foreground">创作方案</span>
         {isStreaming && (
           <span className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             生成中...
           </span>
         )}
       </div>
 
       {/* Content */}
-      <div className="px-5 py-4 prose prose-invert prose-sm max-w-none">
+      <div className="px-5 py-4 prose prose-sm max-w-none">
         <ReactMarkdown
           components={{
             h2: ({ children }) => (
-              <h2 className="text-lg font-semibold text-primary mt-6 mb-3 first:mt-0">
+              <h2 className="text-lg font-semibold text-accent mt-6 mb-3 first:mt-0">
                 {children}
               </h2>
             ),
@@ -47,7 +47,7 @@ export function TransformResult({ content, isStreaming }: TransformResultProps) 
             ),
             li: ({ children }) => (
               <li className="flex gap-2 text-foreground/90">
-                <span className="text-primary mt-1">•</span>
+                <span className="text-accent mt-1">•</span>
                 <span>{children}</span>
               </li>
             ),

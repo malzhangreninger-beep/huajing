@@ -54,7 +54,7 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-card border border-border rounded-xl p-6"
+      className="bg-card border-2 border-foreground rounded p-6"
     >
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-semibold text-foreground">新的灵感记录</h2>
@@ -76,7 +76,7 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="看到的、想到的、感受到的...任何创作相关的碎片都可以"
-          className="w-full h-32 px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+          className="w-full h-32 px-4 py-3 text-foreground placeholder:text-muted-foreground resize-none transition-all"
         />
       </div>
 
@@ -92,11 +92,11 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
               type="button"
               onClick={() => setMood(option.value)}
               className={`
-                flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all
+                flex-1 py-2 px-3 rounded text-sm font-medium transition-all border-2 border-foreground
                 ${
                   mood === option.value
                     ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                    : "bg-card text-foreground hover:bg-secondary"
                 }
               `}
             >
@@ -115,13 +115,13 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
           {tags.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+              className="inline-flex items-center gap-1 px-3 py-1 bg-primary text-primary-foreground border-2 border-foreground rounded-full text-sm"
             >
               {tag}
               <button
                 type="button"
                 onClick={() => handleRemoveTag(tag)}
-                className="hover:text-destructive transition-colors"
+                className="hover:text-quaternary transition-colors"
               >
                 <X className="w-3 h-3" />
               </button>
@@ -140,13 +140,13 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
               }
             }}
             placeholder="输入标签后按回车"
-            className="flex-1 px-4 py-2 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+            className="flex-1 px-4 py-2 text-foreground placeholder:text-muted-foreground text-sm transition-all"
           />
           <button
             type="button"
             onClick={() => handleAddTag(tagInput)}
             disabled={!tagInput.trim()}
-            className="px-4 py-2 bg-secondary border border-border rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-4 py-2 bg-card border-2 border-foreground rounded text-foreground hover:bg-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -164,7 +164,7 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
                   key={tag}
                   type="button"
                   onClick={() => handleAddTag(tag)}
-                  className="px-2.5 py-1 text-xs bg-secondary text-muted-foreground rounded-full hover:text-foreground hover:bg-secondary/80 transition-colors"
+                  className="px-2.5 py-1 text-xs bg-secondary text-foreground border border-foreground/40 rounded-full hover:bg-primary hover:text-primary-foreground hover:border-foreground transition-colors"
                 >
                   + {tag}
                 </button>
@@ -174,7 +174,7 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+      <div className="flex items-center justify-end gap-3 pt-4 border-t-2 border-foreground">
         <button
           type="button"
           onClick={onCancel}
@@ -185,7 +185,7 @@ export function JournalForm({ onSubmit, onCancel }: JournalFormProps) {
         <button
           type="submit"
           disabled={!content.trim()}
-          className="px-6 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-2 bg-primary text-primary-foreground border-2 border-foreground rounded text-sm font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           保存记录
         </button>

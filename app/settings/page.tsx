@@ -8,10 +8,10 @@ export default function SettingsPage() {
       <main className="flex-1 overflow-y-auto">
         <div className="min-h-screen">
           {/* Header */}
-          <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border">
+          <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b-2 border-foreground">
             <div className="flex items-center gap-3 px-6 py-4 lg:px-8">
-              <div className="p-2 rounded-lg bg-secondary border border-border">
-                <Settings className="w-5 h-5 text-muted-foreground" />
+              <div className="p-2 rounded bg-secondary border-2 border-foreground">
+                <Settings className="w-5 h-5 text-foreground" />
               </div>
               <div>
                 <h1 className="text-xl font-semibold text-foreground">设置</h1>
@@ -24,7 +24,7 @@ export default function SettingsPage() {
           <div className="p-6 lg:p-8">
             <div className="max-w-2xl mx-auto space-y-6">
               {/* Profile Section */}
-              <section className="bg-card border border-border rounded-xl p-6">
+              <section className="bg-card border-2 border-foreground rounded p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <User className="w-5 h-5 text-primary" />
                   <h2 className="text-lg font-semibold text-foreground">个人资料</h2>
@@ -37,7 +37,7 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="你的名字或笔名"
-                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                      className="w-full px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all"
                     />
                   </div>
                   <div>
@@ -47,7 +47,7 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="例如：油画、水彩、数字艺术..."
-                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                      className="w-full px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all"
                     />
                   </div>
                   <div>
@@ -57,33 +57,33 @@ export default function SettingsPage() {
                     <textarea
                       placeholder="简单介绍一下你的艺术追求..."
                       rows={3}
-                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                      className="w-full px-4 py-3 text-foreground placeholder:text-muted-foreground resize-none transition-all"
                     />
                   </div>
                 </div>
               </section>
 
               {/* Preferences Section */}
-              <section className="bg-card border border-border rounded-xl p-6">
+              <section className="bg-card border-2 border-foreground rounded p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <Palette className="w-5 h-5 text-primary" />
                   <h2 className="text-lg font-semibold text-foreground">偏好设置</h2>
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between py-3 border-b border-border">
+                  <div className="flex items-center justify-between py-3 border-b-2 border-foreground">
                     <div>
                       <p className="font-medium text-foreground">AI 回应风格</p>
                       <p className="text-sm text-muted-foreground">
                         选择 AI 顾问的交流方式
                       </p>
                     </div>
-                    <select className="px-4 py-2 bg-secondary border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50">
+                    <select className="px-4 py-2 text-foreground">
                       <option>专业学术</option>
                       <option>温暖亲切</option>
                       <option>简洁直接</option>
                     </select>
                   </div>
-                  <div className="py-3 border-b border-border">
+                  <div className="py-3 border-b-2 border-foreground">
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <p className="font-medium text-foreground">美术史参考偏好</p>
@@ -117,11 +117,11 @@ export default function SettingsPage() {
                       ].map((period) => (
                         <label
                           key={period.id}
-                          className="flex items-start gap-3 p-3 bg-secondary/50 border border-border rounded-lg cursor-pointer hover:bg-secondary transition-colors"
+                          className="flex items-start gap-3 p-3 bg-secondary border-2 border-foreground rounded cursor-pointer hover:bg-muted transition-colors"
                         >
                           <input
                             type="checkbox"
-                            className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-primary/50"
+                            className="mt-1 w-4 h-4"
                           />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-foreground">{period.label}</p>
@@ -156,11 +156,11 @@ export default function SettingsPage() {
                       ].map((period) => (
                         <label
                           key={period.id}
-                          className="flex items-start gap-3 p-3 bg-secondary/50 border border-border rounded-lg cursor-pointer hover:bg-secondary transition-colors"
+                          className="flex items-start gap-3 p-3 bg-secondary border-2 border-foreground rounded cursor-pointer hover:bg-muted transition-colors"
                         >
                           <input
                             type="checkbox"
-                            className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-primary/50"
+                            className="mt-1 w-4 h-4"
                           />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-foreground">{period.label}</p>
@@ -187,20 +187,20 @@ export default function SettingsPage() {
               </section>
 
               {/* Data Section */}
-              <section className="bg-card border border-border rounded-xl p-6">
+              <section className="bg-card border-2 border-foreground rounded p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <Shield className="w-5 h-5 text-primary" />
                   <h2 className="text-lg font-semibold text-foreground">数据与隐私</h2>
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between py-3 border-b border-border">
+                  <div className="flex items-center justify-between py-3 border-b-2 border-foreground">
                     <div>
                       <p className="font-medium text-foreground">导出日志数据</p>
                       <p className="text-sm text-muted-foreground">
                         下载你所有的创作日志
                       </p>
                     </div>
-                    <button className="px-4 py-2 bg-secondary border border-border rounded-lg text-foreground hover:bg-secondary/80 transition-colors">
+                    <button className="px-4 py-2 bg-card border-2 border-foreground rounded text-foreground hover:bg-secondary transition-colors">
                       导出
                     </button>
                   </div>
@@ -211,7 +211,7 @@ export default function SettingsPage() {
                         删除你的所有日志和分析记录
                       </p>
                     </div>
-                    <button className="px-4 py-2 bg-destructive/10 border border-destructive/30 rounded-lg text-destructive hover:bg-destructive/20 transition-colors">
+                    <button className="px-4 py-2 bg-card border-2 border-destructive rounded text-destructive hover:bg-destructive hover:text-destructive-foreground transition-colors">
                       清除
                     </button>
                   </div>

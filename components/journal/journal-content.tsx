@@ -65,11 +65,11 @@ export function JournalContent() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b-2 border-foreground">
         <div className="flex items-center justify-between px-6 py-4 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/30">
-              <BookOpen className="w-5 h-5 text-amber-500" />
+            <div className="p-2 rounded bg-primary border-2 border-foreground">
+              <BookOpen className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
               <h1 className="text-xl font-semibold text-foreground">创作日志</h1>
@@ -78,7 +78,7 @@ export function JournalContent() {
           </div>
           <button
             onClick={() => setIsFormOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded bg-primary text-primary-foreground border-2 border-foreground hover:bg-primary/90 transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span className="text-sm font-medium">新记录</span>
@@ -99,8 +99,8 @@ export function JournalContent() {
 
         {entries.length === 0 ? (
           <div className="text-center py-20">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-secondary flex items-center justify-center">
-              <BookOpen className="w-8 h-8 text-muted-foreground" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-secondary border-2 border-foreground flex items-center justify-center">
+              <BookOpen className="w-8 h-8 text-foreground" />
             </div>
             <h3 className="text-lg font-medium text-foreground mb-2">
               还没有任何记录
@@ -110,7 +110,7 @@ export function JournalContent() {
             </p>
             <button
               onClick={() => setIsFormOpen(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded bg-primary text-primary-foreground border-2 border-foreground hover:bg-primary/90 transition-colors"
             >
               <Plus className="w-4 h-4" />
               <span>写下第一条</span>
@@ -136,7 +136,7 @@ export function JournalContent() {
 
       {/* Stats Footer */}
       {entries.length > 0 && (
-        <div className="sticky bottom-0 bg-card border-t border-border px-6 py-4">
+        <div className="sticky bottom-0 bg-card border-t-2 border-foreground px-6 py-4">
           <div className="flex items-center justify-center gap-8 text-sm">
             <div className="text-muted-foreground">
               共 <span className="text-foreground font-medium">{entries.length}</span> 条记录

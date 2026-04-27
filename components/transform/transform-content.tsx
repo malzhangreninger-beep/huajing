@@ -76,11 +76,11 @@ export function TransformContent() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b-2 border-foreground">
         <div className="flex items-center justify-between px-6 py-4 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-purple-500/10 border border-purple-500/30">
-              <Sparkles className="w-5 h-5 text-purple-500" />
+            <div className="p-2 rounded bg-accent border-2 border-foreground">
+              <Sparkles className="w-5 h-5 text-accent-foreground" />
             </div>
             <div>
               <h1 className="text-xl font-semibold text-foreground">灵感转换</h1>
@@ -124,11 +124,11 @@ export function TransformContent() {
                       key={type.id}
                       onClick={() => setSelectedType(type)}
                       className={`
-                        flex items-center gap-2 px-4 py-2 rounded-lg transition-all
+                        flex items-center gap-2 px-4 py-2 rounded transition-all border-2
                         ${
                           selectedType.id === type.id
-                            ? "bg-primary/10 text-primary border border-primary/30"
-                            : "bg-secondary text-muted-foreground hover:text-foreground border border-transparent"
+                            ? "bg-primary text-primary-foreground border-foreground"
+                            : "bg-card text-foreground border-foreground hover:bg-secondary"
                         }
                       `}
                     >
@@ -141,12 +141,13 @@ export function TransformContent() {
 
               {/* Input Form */}
               <form onSubmit={handleSubmit}>
-                <div className="bg-card border border-border rounded-xl p-6">
+                <div className="bg-card border-2 border-foreground rounded p-6">
                   <textarea
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder={selectedType.placeholder}
-                    className="w-full h-40 bg-transparent text-foreground placeholder:text-muted-foreground resize-none focus:outline-none text-lg leading-relaxed"
+                    className="w-full h-40 text-foreground placeholder:text-muted-foreground resize-none text-lg leading-relaxed"
+                    style={{ background: "transparent", border: "none" }}
                   />
                   <p className="text-xs text-muted-foreground mt-2">
                     {selectedType.example}
@@ -157,7 +158,7 @@ export function TransformContent() {
                   <button
                     type="submit"
                     disabled={!inputValue.trim() || isLoading}
-                    className="flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground border-2 border-foreground rounded font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
                     {isLoading ? (
                       <>
@@ -188,7 +189,7 @@ export function TransformContent() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {message.role === "user" ? (
-                    <div className="max-w-lg bg-primary/10 border border-primary/30 rounded-xl px-5 py-4">
+                    <div className="max-w-lg bg-secondary border-2 border-foreground rounded px-5 py-4">
                       <p className="text-foreground whitespace-pre-wrap">
                         {message.parts
                           ?.filter((p) => p.type === "text")
@@ -216,7 +217,7 @@ export function TransformContent() {
 
         {/* Input Area (when in chat mode) */}
         {messages.length > 0 && (
-          <div className="sticky bottom-0 bg-background/95 backdrop-blur border-t border-border p-4">
+          <div className="sticky bottom-0 bg-background/95 backdrop-blur border-t-2 border-foreground p-4">
             <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
               <div className="flex gap-3">
                 <input
@@ -224,12 +225,12 @@ export function TransformContent() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="继续探索，或输入新的灵感来源..."
-                  className="flex-1 px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                  className="flex-1 px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all"
                 />
                 <button
                   type="submit"
                   disabled={!inputValue.trim() || isLoading}
-                  className="px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-3 bg-primary text-primary-foreground border-2 border-foreground rounded hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {isLoading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />

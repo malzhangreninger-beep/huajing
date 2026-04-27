@@ -6,27 +6,30 @@ import { BookOpen, Sparkles, Palette, ArrowRight, Quote } from "lucide-react";
 const features = [
   {
     title: "创作日志",
-    description: "记录每日灵感碎片——看到的、想到的、感受到的。AI 会帮你发现反复出现的母题和意象。",
+    description:
+      "记录每日灵感碎片——看到的、想到的、感受到的。AI 会帮你发现反复出现的母题和意象。",
     icon: BookOpen,
     href: "/journal",
-    color: "from-primary/10 to-primary/5",
-    borderColor: "border-primary/20",
+    iconBg: "bg-primary",
+    iconColor: "text-primary-foreground",
   },
   {
     title: "灵感转换",
-    description: "输入一首诗、一段记忆、一个概念，获得构图建议、色调方案、美术史参考。",
+    description:
+      "输入一首诗、一段记忆、一个概念，获得构图建议、色调方案、美术史参考。",
     icon: Sparkles,
     href: "/transform",
-    color: "from-stone-200/50 to-stone-100/30",
-    borderColor: "border-stone-300/50",
+    iconBg: "bg-accent",
+    iconColor: "text-accent-foreground",
   },
   {
     title: "母题画廊",
-    description: "AI 分析你的创作日志，识别你的艺术语言、情绪基调、关注的哲学命题。",
+    description:
+      "AI 分析你的创作日志，识别你的艺术语言、情绪基调、关注的哲学命题。",
     icon: Palette,
     href: "/themes",
-    color: "from-secondary to-muted/50",
-    borderColor: "border-border",
+    iconBg: "bg-tertiary",
+    iconColor: "text-tertiary-foreground",
   },
 ];
 
@@ -54,7 +57,7 @@ export function HomeContent() {
       <div className="max-w-4xl mx-auto mb-16 animate-fade-in">
         <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 tracking-tight">
-            欢迎来到<span className="text-primary">画境</span>
+            欢迎来到<span className="text-accent">画境</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             一个为艺术创作者服务的 AI 创作伴侣。通过「向内挖掘」和「向外转化」，
@@ -63,10 +66,10 @@ export function HomeContent() {
         </div>
 
         {/* Quote */}
-        <div className="relative bg-card border border-border rounded-2xl p-8 mb-12">
-          <Quote className="absolute top-4 left-4 w-8 h-8 text-primary/20" />
+        <div className="relative bg-secondary border-2 border-foreground rounded p-8 mb-12">
+          <Quote className="absolute top-4 left-4 w-8 h-8 text-accent/40" />
           <blockquote className="text-center">
-            <p className="text-xl text-foreground/90 italic mb-4 leading-relaxed">
+            <p className="text-xl text-foreground italic mb-4 leading-relaxed">
               「{randomQuote.text}」
             </p>
             <cite className="text-sm text-muted-foreground">
@@ -91,19 +94,14 @@ export function HomeContent() {
                 className="group animate-slide-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div
-                  className={`
-                    relative h-full bg-gradient-to-br ${feature.color} 
-                    border ${feature.borderColor} rounded-2xl p-6
-                    transition-all duration-300
-                    hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/5
-                  `}
-                >
+                <div className="relative h-full bg-card border-2 border-foreground rounded p-6 transition-all duration-300 hover:bg-secondary">
                   <div className="flex items-start justify-between mb-4">
-                    <div className="p-3 rounded-xl bg-background/50 border border-border">
-                      <Icon className="w-6 h-6 text-primary" />
+                    <div
+                      className={`p-3 rounded ${feature.iconBg} border-2 border-foreground`}
+                    >
+                      <Icon className={`w-6 h-6 ${feature.iconColor}`} />
                     </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
                   </div>
                   <h3 className="text-lg font-semibold text-foreground mb-2">
                     {feature.title}
@@ -119,10 +117,13 @@ export function HomeContent() {
       </div>
 
       {/* Philosophy Section */}
-      <div className="max-w-3xl mx-auto mt-20 text-center animate-fade-in" style={{ animationDelay: "400ms" }}>
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse-soft" />
-          <span className="text-xs text-muted-foreground">设计理念</span>
+      <div
+        className="max-w-3xl mx-auto mt-20 text-center animate-fade-in"
+        style={{ animationDelay: "400ms" }}
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border-2 border-foreground mb-6">
+          <span className="w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
+          <span className="text-xs text-foreground">设计理念</span>
         </div>
         <h3 className="text-2xl font-semibold text-foreground mb-4">
           不生成图像，而是激发创作
