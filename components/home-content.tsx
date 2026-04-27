@@ -10,7 +10,7 @@ const features = [
     description: "记录每日灵感碎片——看到的、想到的、感受到的。AI 会帮你发现反复出现的母题和意象。",
     icon: BookOpen,
     href: "/journal",
-    color: "from-primary/10 to-primary/5",
+    color: "from-[#E8E4DC] to-[#E0DCD4]",
     borderColor: "border-primary/20",
   },
   {
@@ -18,7 +18,7 @@ const features = [
     description: "输入一首诗、一段记忆、一个概念，获得构图建议、色调方案、美术史参考。",
     icon: Sparkles,
     href: "/transform",
-    color: "from-stone-200/50 to-stone-100/30",
+    color: "from-[#E4E0D8] to-[#DCE0D8]",
     borderColor: "border-stone-300/50",
   },
   {
@@ -26,7 +26,7 @@ const features = [
     description: "AI 分析你的创作日志，识别你的艺术语言、情绪基调、关注的哲学命题。",
     icon: Palette,
     href: "/themes",
-    color: "from-secondary to-muted/50",
+    color: "from-[#E0DCD8] to-[#D8D4CE]",
     borderColor: "border-border",
   },
 ];

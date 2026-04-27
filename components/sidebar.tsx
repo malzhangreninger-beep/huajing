@@ -59,22 +59,22 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:sticky top-0 left-0 h-screen w-64 bg-card border-r border-border
+          fixed lg:sticky top-0 left-0 h-screen w-64 bg-[#E8E4DC] border-r border-r-[#C8C2B8]
           flex flex-col z-40 transition-transform duration-300
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
       >
         {/* Logo */}
-        <div className="p-6 border-b border-border">
+        <div className="p-6 border-b-[3px] border-b-[#1A1208]">
           <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsOpen(false)}>
-            <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center">
-              <span className="text-primary text-xl font-semibold">画</span>
+            <div className="w-10 h-10 bg-[#B5A898] flex items-center justify-center">
+              <span className="text-[#F0ECD8] text-xl font-semibold">画</span>
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+              <h1 className="text-lg font-semibold text-[#F0ECD8] transition-colors">
                 画境
               </h1>
-              <p className="text-xs text-muted-foreground">AI 创作伴侣</p>
+              <p className="text-xs text-[rgba(240,236,216,0.6)]">AI 创作伴侣</p>
             </div>
           </Link>
         </div>
@@ -91,11 +91,11 @@ export function Sidebar() {
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className={`
-                  flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200
+                  flex items-center gap-3 px-4 py-3 border-l-4 transition-all duration-200
                   ${
                     isActive
-                      ? "bg-primary/10 text-primary border border-primary/30"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                      ? "border-l-[#8E8478] bg-[rgba(196,132,60,0.15)] text-[#3D3830]"
+                      : "border-l-transparent text-[#7A7268] hover:text-[#F0ECD8]"
                   }
                 `}
               >
@@ -110,16 +110,16 @@ export function Sidebar() {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-t-[#1A1208]">
           <Link
             href="/settings"
             onClick={() => setIsOpen(false)}
             className={`
-              flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200
+              flex items-center gap-3 px-4 py-3 border-l-4 transition-all duration-200
               ${
                 pathname === "/settings"
-                  ? "bg-primary/10 text-primary border border-primary/30"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                  ? "border-l-[#8E8478] bg-[rgba(196,132,60,0.15)] text-[#3D3830]"
+                  : "border-l-transparent text-[#7A7268] hover:text-[#F0ECD8]"
               }
             `}
           >
