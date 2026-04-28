@@ -1,37 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  /* Clément Serveau 静物画褪色温暖配色 */
-  --background: #ede6ce;          /* 暖米白画布 */
-  --foreground: #4a3a25;          /* 温暖深棕，柔和的轮廓 */
-  --card: #f2edd8;                /* 卡片底色，比背景亮一档 */
-  --card-foreground: #4a3a25;
-  --primary: #a8b398;             /* 褪色鼠尾草绿，画中桌面 */
-  --primary-foreground: #4a3a25;
-  --secondary: #e3dcc1;           /* 略深米色 */
-  --secondary-foreground: #4a3a25;
-  --muted: #e8e1c5;
-  --muted-foreground: #7a6850;    /* 中褐色文字 */
-  --accent: #b5805a;              /* 褪色赭土橙，画中吉他 */
-  --accent-foreground: #f2edd8;
-  --tertiary: #90a5ac;            /* 雾蓝灰，画中桌面 */
-  --tertiary-foreground: #4a3a25;
-  --quaternary: #d4ab94;          /* 藕粉桃色，画中花卉 */
-  --quaternary-foreground: #4a3a25;
-  --quote-bg: #d4b97a;            /* 褪色暖黄 */
-  --quote-foreground: #4a3a25;
-  --border: #8b7355;              /* 中褐描边，比深棕柔和 */
-  --ring: #a8b398;
-  --radius: 0.25rem;
-  --destructive: #a85a4a;
-  --destructive-foreground: #f2edd8;
+  /* Clément Serveau 静物画 · 油画颜料配色 */
+  --background: #e8e0cc;          /* 亚麻画布底色 */
+  --foreground: #2c2010;          /* 深暖棕轮廓线 */
 
-  /* 侧边栏：温暖深棕，但比之前的纯深棕柔和 */
-  --sidebar: #4a3a25;
-  --sidebar-foreground: #ede6ce;
+  /* 卡片底色 —— 半透明颜料色，能透出画布肌理 */
+  --card: rgba(238, 229, 203, 0.7);
+  --card-solid: #eee5cb;
+  --card-foreground: #2c2010;
+
+  /* 主色 —— 鼠尾草绿（画里桌面） */
+  --primary: #9cab89;
+  --primary-foreground: #f0e7cf;
+
+  --secondary: #ddd2b3;
+  --secondary-foreground: #2c2010;
+
+  --muted: #ded3b6;
+  --muted-foreground: #6e5a3d;
+
+  /* 强调 —— 褪色赭土橙（画里吉他） */
+  --accent: #b07246;
+  --accent-foreground: #f0e7cf;
+
+  /* 雾蓝灰（画里桌沿） */
+  --tertiary: #8ea1a8;
+  --tertiary-foreground: #f0e7cf;
+
+  /* 藕粉桃（画里花卉） */
+  --quaternary: #c99780;
+  --quaternary-foreground: #2c2010;
+
+  /* 雾紫灰（画里布料） */
+  --quinary: #a29ca8;
+  --quinary-foreground: #f0e7cf;
+
+  /* 褪色芥末黄（画里背景区） */
+  --quote-bg: #c9b05a;
+  --quote-foreground: #2c2010;
+
+  --royal: #2b4280;
+  --royal-foreground: #f0e7cf;
+
+  /* 描边 —— 温暖中褐，半透明像颜料晕染 */
+  --border: rgba(44, 32, 16, 0.3);
+  --border-soft: rgba(44, 32, 16, 0.15);
+  --ring: #b07246;
+  --radius: 0.125rem;
+
+  --destructive: #a85a4a;
+  --destructive-foreground: #f0e7cf;
+
+  /* 侧边栏 —— 深暖棕颜料块 */
+  --sidebar: #2c2010;
+  --sidebar-foreground: #e8e0cc;
   --sidebar-muted: #8b7355;
-  --sidebar-active: #a8b398;
-  --sidebar-border: #6b5740;
+  --sidebar-active: #c9b05a;
+  --sidebar-border: rgba(232, 224, 204, 0.15);
 }
 
 @theme inline {
@@ -51,9 +77,14 @@
   --color-tertiary-foreground: var(--tertiary-foreground);
   --color-quaternary: var(--quaternary);
   --color-quaternary-foreground: var(--quaternary-foreground);
+  --color-quinary: var(--quinary);
+  --color-quinary-foreground: var(--quinary-foreground);
   --color-quote-bg: var(--quote-bg);
   --color-quote-foreground: var(--quote-foreground);
+  --color-royal: var(--royal);
+  --color-royal-foreground: var(--royal-foreground);
   --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
@@ -63,56 +94,90 @@
   --color-sidebar-active: var(--sidebar-active);
   --color-sidebar-border: var(--sidebar-border);
 
-  --radius-sm: 0.25rem;
-  --radius-md: 0.25rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.25rem;
-  --radius-2xl: 0.25rem;
-  --radius-3xl: 0.25rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.125rem;
+  --radius-lg: 0.125rem;
+  --radius-xl: 0.125rem;
+  --radius-2xl: 0.125rem;
+  --radius-3xl: 0.125rem;
 
-  --font-sans: var(--font-noto-serif-sc), "Noto Serif SC", serif;
+  --font-sans: var(--font-noto-serif-sc), "Noto Serif SC", "Songti SC", serif;
   --font-mono: var(--font-geist-mono), monospace;
 }
 
+/* ==========================================
+   画布纹理 —— 整页基底
+   ========================================== */
 body {
-  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  letter-spacing: 0.02em;
+  background-color: #e8e0cc;
+  background-image:
+    /* 织物纵纹 */
+    repeating-linear-gradient(
+      90deg,
+      rgba(122, 98, 64, 0.025) 0px,
+      rgba(122, 98, 64, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    /* 织物横纹 */
+    repeating-linear-gradient(
+      0deg,
+      rgba(122, 98, 64, 0.025) 0px,
+      rgba(122, 98, 64, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    /* 画布颗粒 */
+    radial-gradient(circle at 25% 35%, rgba(176, 114, 70, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 75% 65%, rgba(156, 171, 137, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(201, 151, 128, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
-/* 全站去除阴影 */
-*,
-*::before,
-*::after {
+/* ==========================================
+   全站去除现代感
+   ========================================== */
+*, *::before, *::after {
   box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
-/* 自定义滚动条 */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ==========================================
+   字体节奏 —— 标题用衬线，正文加字距
+   ========================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+  font-weight: 600;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+p, span, a, button, label, li, div {
+  letter-spacing: 0.025em;
 }
 
+/* ==========================================
+   滚动条
+   ========================================== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: rgba(44, 32, 16, 0.2);
   border-radius: 3px;
 }
+::-webkit-scrollbar-thumb:hover { background: rgba(44, 32, 16, 0.35); }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
-}
-
-/* 优雅的文字选中 */
 ::selection {
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
 
-/* 输入框：卡片底色 + 1.5px 中褐描边，柔和轮廓感 */
+/* ==========================================
+   输入框 —— 像画里的素描线
+   ========================================== */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -120,70 +185,57 @@ input[type="search"],
 input[type="number"],
 textarea,
 select {
-  background-color: var(--card) !important;
-  border: 1.5px solid var(--border) !important;
-  border-radius: 0.25rem !important;
+  background-color: rgba(238, 229, 203, 0.5) !important;
+  border: 2px solid rgba(44, 32, 16, 0.3) !important;
+  border-radius: 0.125rem !important;
   color: var(--foreground);
+  font-family: var(--font-sans);
+  letter-spacing: 0.025em;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="search"]:focus,
-input[type="number"]:focus,
-textarea:focus,
-select:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: var(--accent) !important;
+  border-color: rgba(44, 32, 16, 0.6) !important;
+  background-color: rgba(238, 229, 203, 0.7) !important;
 }
 
-/* 复选框样式 */
-input[type="checkbox"] {
-  accent-color: var(--primary);
+input[type="checkbox"] { accent-color: var(--accent); }
+
+/* ==========================================
+   油画肌理类 —— 给卡片用
+   ========================================== */
+.painted-card {
+  background-color: rgba(238, 229, 203, 0.55);
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(176, 114, 70, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(156, 171, 137, 0.04) 0%, transparent 50%);
+  border: 2px solid rgba(44, 32, 16, 0.3);
+  border-radius: 2px;
+  position: relative;
 }
 
-/* Fade in 动画 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 颜料笔触感分隔线 */
+.brush-divider {
+  border: none;
+  border-bottom: 2px solid rgba(44, 32, 16, 0.3);
+  border-radius: 0;
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+/* 极慢淡入 —— 像颜料慢慢显影 */
+@keyframes paintFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-paint-in {
+  opacity: 0;
+  animation: paintFadeIn 1.6s ease-out forwards;
 }
 
-/* Slide up 动画 */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes paintSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.animate-slide-up {
-  animation: slideUp 0.5s ease-out forwards;
-}
-
-/* Pulse subtle 动画 */
-@keyframes pulseSoft {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-.animate-pulse-soft {
-  animation: pulseSoft 2s ease-in-out infinite;
+.animate-paint-slide {
+  opacity: 0;
+  animation: paintSlideIn 1.4s ease-out forwards;
 }
