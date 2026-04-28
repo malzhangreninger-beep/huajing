@@ -2,14 +2,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Sparkles, Palette, Home, Settings, Menu, X } from "lucide-react";
+import {
+  BookOpen,
+  Sparkles,
+  Palette,
+  Settings,
+  Menu,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 
-const navigation = [
-  { name: "首页", href: "/", icon: Home },
-  { name: "创作日志", href: "/journal", icon: BookOpen },
-  { name: "灵感转换", href: "/transform", icon: Sparkles },
-  { name: "母题画廊", href: "/themes", icon: Palette },
+const navItems = [
+  {
+    name: "创作日志",
+    href: "/journal",
+    icon: BookOpen,
+    description: "记录每日灵感碎片",
+  },
+  {
+    name: "灵感转换",
+    href: "/transform",
+    icon: Sparkles,
+    description: "跨媒介创作方案",
+  },
+  {
+    name: "母题画廊",
+    href: "/themes",
+    icon: Palette,
+    description: "发现你的艺术语言",
+  },
 ];
 
 export function Sidebar() {
@@ -18,159 +39,111 @@ export function Sidebar() {
 
   return (
     <>
-      {/* 移动端菜单按钮 */}
+      {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2"
-        style={{
-          background: "var(--sidebar)",
-          color: "var(--sidebar-foreground)",
-          border: "1px solid var(--sidebar-border)",
-          borderRadius: "3px",
-        }}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded bg-sidebar border-2 border-sidebar text-sidebar-foreground hover:bg-sidebar/90 transition-colors"
         aria-label={isOpen ? "关闭菜单" : "打开菜单"}
       >
         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
-      {/* 移动端遮罩 */}
+      {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-30"
-          style={{ background: "rgba(58, 52, 40, 0.4)" }}
+          className="lg:hidden fixed inset-0 bg-foreground/40 backdrop-blur-sm z-40"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* 侧边栏 */}
+      {/* Sidebar */}
       <aside
         className={`
-          fixed lg:sticky top-0 left-0 z-40
-          w-[200px] h-screen
-          flex flex-col
-          transform transition-transform duration-300 ease-out
+          fixed lg:sticky top-0 left-0 h-screen w-64 bg-sidebar text-sidebar-foreground
+          flex flex-col z-40 transition-transform duration-300
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
-        style={{
-          background: "var(--sidebar)",
-          color: "var(--sidebar-foreground)",
-          borderRight: "1px solid var(--sidebar-border)",
-        }}
       >
         {/* Logo */}
-        <div
-          className="px-6 py-7"
-          style={{ borderBottom: "1px solid var(--sidebar-border)" }}
-        >
-          <Link href="/" className="block" onClick={() => setIsOpen(false)}>
-            <h1
-              className="text-2xl font-semibold"
-              style={{
-                color: "var(--sidebar-foreground)",
-                letterSpacing: "0.08em",
-              }}
+        <div className="p-6 border-b-2 border-sidebar-border">
+          <Link
+            href="/"
+            className="flex items-center gap-3 group"
+            onClick={() => setIsOpen(false)}
+          >
+            <div
+              className="w-10 h-10 rounded bg-accent flex items-center justify-center"
+              style={{ border: "1.5px solid var(--sidebar-border)" }}
             >
-              画境
-            </h1>
-            <p
-              className="text-[10px] mt-1.5 italic"
-              style={{
-                color: "var(--muted-foreground)",
-                letterSpacing: "0.2em",
-              }}
-            >
-              huà jìng
-            </p>
+              <span className="text-background text-xl font-semibold">
+                画
+              </span>
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-sidebar-foreground group-hover:text-primary transition-colors">
+                画境
+              </h1>
+              <p className="text-xs text-sidebar-foreground/60">AI 创作伴侣</p>
+            </div>
           </Link>
         </div>
 
-        {/* 导航 */}
-        <nav className="flex-1 px-3 py-6">
-          <p
-            className="px-3 mb-3 text-[10px] uppercase"
-            style={{
-              color: "var(--muted-foreground)",
-              letterSpacing: "0.22em",
-            }}
-          >
-            目录
-          </p>
-          <div className="space-y-0.5">
-            {navigation.map((item) => {
-              const Icon = item.icon;
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2.5 text-sm transition-colors"
-                  style={{
-                    background: isActive
-                      ? "rgba(58, 52, 40, 0.08)"
-                      : "transparent",
-                    color: isActive
-                      ? "var(--foreground)"
-                      : "var(--muted-foreground)",
-                    borderLeft: isActive
-                      ? "2px solid var(--foreground)"
-                      : "2px solid transparent",
-                    paddingLeft: "10px",
-                    borderRadius: "2px",
-                  }}
-                >
-                  <Icon className="w-4 h-4 flex-shrink-0" strokeWidth={1.5} />
-                  <span style={{ letterSpacing: "0.08em" }}>{item.name}</span>
-                </Link>
-              );
-            })}
-          </div>
+        {/* Navigation */}
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            const Icon = item.icon;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className={`
+                  relative flex items-center gap-3 px-4 py-3 rounded transition-all duration-200
+                  ${
+                    isActive
+                      ? "bg-sidebar-foreground/5 text-sidebar-foreground"
+                      : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-foreground/5"
+                  }
+                `}
+              >
+                {/* 激活状态左侧绿色色条 */}
+                {isActive && (
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-sidebar-active rounded-r" />
+                )}
+                <Icon className="w-5 h-5 flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm truncate">{item.name}</p>
+                  <p className="text-xs opacity-60 truncate">
+                    {item.description}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* 设置 + 签名 */}
-        <div
-          className="px-3 py-4"
-          style={{ borderTop: "1px solid var(--sidebar-border)" }}
-        >
+        {/* Footer */}
+        <div className="p-4 border-t-2 border-sidebar-border">
           <Link
             href="/settings"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 px-3 py-2.5 text-sm transition-colors"
-            style={{
-              color:
+            className={`
+              relative flex items-center gap-3 px-4 py-3 rounded transition-all duration-200
+              ${
                 pathname === "/settings"
-                  ? "var(--foreground)"
-                  : "var(--muted-foreground)",
-              background:
-                pathname === "/settings"
-                  ? "rgba(58, 52, 40, 0.08)"
-                  : "transparent",
-              borderLeft:
-                pathname === "/settings"
-                  ? "2px solid var(--foreground)"
-                  : "2px solid transparent",
-              paddingLeft: "10px",
-              borderRadius: "2px",
-            }}
+                  ? "bg-sidebar-foreground/5 text-sidebar-foreground"
+                  : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-foreground/5"
+              }
+            `}
           >
-            <Settings className="w-4 h-4" strokeWidth={1.5} />
-            <span style={{ letterSpacing: "0.08em" }}>设置</span>
+            {pathname === "/settings" && (
+              <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-sidebar-active rounded-r" />
+            )}
+            <Settings className="w-5 h-5" />
+            <span className="text-sm font-medium">设置</span>
           </Link>
-
-          <div
-            className="mt-4 pt-4 px-3"
-            style={{ borderTop: "1px solid var(--sidebar-border)" }}
-          >
-            <p
-              className="text-[10px] italic"
-              style={{
-                color: "var(--muted-foreground)",
-                letterSpacing: "0.18em",
-              }}
-            >
-              Atelier · MMXXVI
-            </p>
-          </div>
         </div>
       </aside>
     </>
