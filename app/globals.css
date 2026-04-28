@@ -1,63 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  /* Clément Serveau 静物画 · 油画颜料配色 */
-  --background: #e8e0cc;          /* 亚麻画布底色 */
-  --foreground: #2c2010;          /* 深暖棕轮廓线 */
+  /* 莫兰迪低饱和度配色 */
+  --background: #eae6dc;          /* 画布米白 */
+  --foreground: #3a3428;          /* 主文字 深灰棕 */
+  --card: #e4e0d4;                /* 卡片底色 */
+  --card-foreground: #3a3428;
+  --primary: #5c5040;             /* 主按钮 深灰棕 */
+  --primary-foreground: #eae6dc;
+  --secondary: #d8d2c4;
+  --secondary-foreground: #3a3428;
+  --muted: #d8d2c4;
+  --muted-foreground: #7a7060;    /* 次要文字 */
+  --accent: #b5a892;
+  --accent-foreground: #3a3428;
+  --border: #c4beb0;
+  --input: #c4beb0;
+  --ring: #5c5040;
+  --destructive: #a87060;
+  --destructive-foreground: #eae6dc;
 
-  /* 卡片底色 —— 半透明颜料色，能透出画布肌理 */
-  --card: rgba(238, 229, 203, 0.7);
-  --card-solid: #eee5cb;
-  --card-foreground: #2c2010;
+  --sidebar: #d8d2c4;
+  --sidebar-foreground: #3a3428;
+  --sidebar-border: #c4beb0;
 
-  /* 主色 —— 鼠尾草绿（画里桌面） */
-  --primary: #9cab89;
-  --primary-foreground: #f0e7cf;
+  /* 画里物体的低饱和点缀色 */
+  --tone-sage: #b5b8a0;           /* 鼠尾草绿 */
+  --tone-ochre: #b89878;          /* 赭土 */
+  --tone-clay: #a89488;           /* 陶土 */
+  --tone-ink: #6a7480;            /* 雾蓝 */
+  --tone-mustard: #c4b080;        /* 芥末黄 */
+  --tone-rose: #c4a89c;           /* 藕粉 */
 
-  --secondary: #ddd2b3;
-  --secondary-foreground: #2c2010;
-
-  --muted: #ded3b6;
-  --muted-foreground: #6e5a3d;
-
-  /* 强调 —— 褪色赭土橙（画里吉他） */
-  --accent: #b07246;
-  --accent-foreground: #f0e7cf;
-
-  /* 雾蓝灰（画里桌沿） */
-  --tertiary: #8ea1a8;
-  --tertiary-foreground: #f0e7cf;
-
-  /* 藕粉桃（画里花卉） */
-  --quaternary: #c99780;
-  --quaternary-foreground: #2c2010;
-
-  /* 雾紫灰（画里布料） */
-  --quinary: #a29ca8;
-  --quinary-foreground: #f0e7cf;
-
-  /* 褪色芥末黄（画里背景区） */
-  --quote-bg: #c9b05a;
-  --quote-foreground: #2c2010;
-
-  --royal: #2b4280;
-  --royal-foreground: #f0e7cf;
-
-  /* 描边 —— 温暖中褐，半透明像颜料晕染 */
-  --border: rgba(44, 32, 16, 0.3);
-  --border-soft: rgba(44, 32, 16, 0.15);
-  --ring: #b07246;
-  --radius: 0.125rem;
-
-  --destructive: #a85a4a;
-  --destructive-foreground: #f0e7cf;
-
-  /* 侧边栏 —— 深暖棕颜料块 */
-  --sidebar: #2c2010;
-  --sidebar-foreground: #e8e0cc;
-  --sidebar-muted: #8b7355;
-  --sidebar-active: #c9b05a;
-  --sidebar-border: rgba(232, 224, 204, 0.15);
+  --radius: 4px;
 }
 
 @theme inline {
@@ -73,85 +48,100 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-tertiary: var(--tertiary);
-  --color-tertiary-foreground: var(--tertiary-foreground);
-  --color-quaternary: var(--quaternary);
-  --color-quaternary-foreground: var(--quaternary-foreground);
-  --color-quinary: var(--quinary);
-  --color-quinary-foreground: var(--quinary-foreground);
-  --color-quote-bg: var(--quote-bg);
-  --color-quote-foreground: var(--quote-foreground);
-  --color-royal: var(--royal);
-  --color-royal-foreground: var(--royal-foreground);
   --color-border: var(--border);
-  --color-border-soft: var(--border-soft);
+  --color-input: var(--input);
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-muted: var(--sidebar-muted);
-  --color-sidebar-active: var(--sidebar-active);
   --color-sidebar-border: var(--sidebar-border);
 
-  --radius-sm: 0.125rem;
-  --radius-md: 0.125rem;
-  --radius-lg: 0.125rem;
-  --radius-xl: 0.125rem;
-  --radius-2xl: 0.125rem;
-  --radius-3xl: 0.125rem;
+  --color-tone-sage: var(--tone-sage);
+  --color-tone-ochre: var(--tone-ochre);
+  --color-tone-clay: var(--tone-clay);
+  --color-tone-ink: var(--tone-ink);
+  --color-tone-mustard: var(--tone-mustard);
+  --color-tone-rose: var(--tone-rose);
 
   --font-sans: var(--font-noto-serif-sc), "Noto Serif SC", "Songti SC", serif;
   --font-mono: var(--font-geist-mono), monospace;
 }
 
-/* ==========================================
-   画布纹理 —— 整页基底
-   ========================================== */
+* {
+  border-color: var(--border);
+}
+
+html,
 body {
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   letter-spacing: 0.02em;
-  background-color: #e8e0cc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 画布纹理 —— 极细腻的颜料颗粒 */
+body {
+  position: relative;
+  background-color: var(--background);
   background-image:
-    /* 织物纵纹 */
     repeating-linear-gradient(
       90deg,
-      rgba(122, 98, 64, 0.025) 0px,
-      rgba(122, 98, 64, 0.025) 1px,
-      transparent 1px,
-      transparent 3px
+      transparent 0px,
+      transparent 2px,
+      rgba(58, 52, 40, 0.012) 2px,
+      rgba(58, 52, 40, 0.012) 3px
     ),
-    /* 织物横纹 */
     repeating-linear-gradient(
       0deg,
-      rgba(122, 98, 64, 0.025) 0px,
-      rgba(122, 98, 64, 0.025) 1px,
-      transparent 1px,
-      transparent 3px
+      transparent 0px,
+      transparent 2px,
+      rgba(58, 52, 40, 0.012) 2px,
+      rgba(58, 52, 40, 0.012) 3px
     ),
-    /* 画布颗粒 */
-    radial-gradient(circle at 25% 35%, rgba(176, 114, 70, 0.06) 0%, transparent 45%),
-    radial-gradient(circle at 75% 65%, rgba(156, 171, 137, 0.05) 0%, transparent 45%),
-    radial-gradient(circle at 50% 100%, rgba(201, 151, 128, 0.04) 0%, transparent 50%);
+    radial-gradient(
+      ellipse 800px 600px at 20% 25%,
+      rgba(184, 152, 120, 0.05) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 700px 500px at 80% 75%,
+      rgba(106, 116, 128, 0.04) 0%,
+      transparent 60%
+    );
   background-attachment: fixed;
 }
 
-/* ==========================================
-   全站去除现代感
-   ========================================== */
-*, *::before, *::after {
+/* 颜料颗粒噪点 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(58, 52, 40, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 3px 5px, rgba(58, 52, 40, 0.03) 0.5px, transparent 1px);
+  background-size: 4px 4px, 7px 7px;
+  z-index: 0;
+}
+
+/* 强制去除所有现代感 */
+*,
+*::before,
+*::after {
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-/* ==========================================
-   字体节奏 —— 标题用衬线，正文加字距
-   ========================================== */
+/* 标题 */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
   font-weight: 600;
 }
 
@@ -159,25 +149,17 @@ p, span, a, button, label, li, div {
   letter-spacing: 0.025em;
 }
 
-/* ==========================================
-   滚动条
-   ========================================== */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: rgba(44, 32, 16, 0.2);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover { background: rgba(44, 32, 16, 0.35); }
-
-::selection {
-  background: var(--accent);
-  color: var(--accent-foreground);
+/* 按钮 —— 直角，无阴影 */
+button {
+  font-family: var(--font-sans);
+  transition: opacity 0.3s ease;
 }
 
-/* ==========================================
-   输入框 —— 像画里的素描线
-   ========================================== */
+button:hover {
+  opacity: 0.85;
+}
+
+/* 输入框 */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -185,57 +167,98 @@ input[type="search"],
 input[type="number"],
 textarea,
 select {
-  background-color: rgba(238, 229, 203, 0.5) !important;
-  border: 2px solid rgba(44, 32, 16, 0.3) !important;
-  border-radius: 0.125rem !important;
+  background: var(--card);
+  border: 1px solid var(--border);
   color: var(--foreground);
   font-family: var(--font-sans);
-  letter-spacing: 0.025em;
+  border-radius: 3px;
+  padding: 10px 14px;
+  transition: border-color 0.3s ease;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
-  border-color: rgba(44, 32, 16, 0.6) !important;
-  background-color: rgba(238, 229, 203, 0.7) !important;
+  border-color: var(--foreground);
 }
 
-input[type="checkbox"] { accent-color: var(--accent); }
-
-/* ==========================================
-   油画肌理类 —— 给卡片用
-   ========================================== */
-.painted-card {
-  background-color: rgba(238, 229, 203, 0.55);
-  background-image:
-    radial-gradient(circle at 30% 20%, rgba(176, 114, 70, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(156, 171, 137, 0.04) 0%, transparent 50%);
-  border: 2px solid rgba(44, 32, 16, 0.3);
-  border-radius: 2px;
-  position: relative;
+input[type="checkbox"] {
+  accent-color: var(--primary);
 }
 
-/* 颜料笔触感分隔线 */
-.brush-divider {
-  border: none;
-  border-bottom: 2px solid rgba(44, 32, 16, 0.3);
-  border-radius: 0;
+/* 链接 */
+a {
+  color: inherit;
+  transition: opacity 0.3s ease;
 }
 
-/* 极慢淡入 —— 像颜料慢慢显影 */
-@keyframes paintFadeIn {
+a:hover {
+  opacity: 0.7;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* 极慢淡入 */
+@keyframes paint-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-.animate-paint-in {
-  opacity: 0;
-  animation: paintFadeIn 1.6s ease-out forwards;
+.paint-in {
+  animation: paint-in 0.6s ease forwards;
 }
 
-@keyframes paintSlideIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+/* 内容层级 */
+main,
+aside,
+header,
+section {
+  position: relative;
+  z-index: 1;
 }
-.animate-paint-slide {
-  opacity: 0;
-  animation: paintSlideIn 1.4s ease-out forwards;
+
+/* 画框感卡片 */
+.flat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* 插画占位区 */
+.illustration-placeholder {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+/* 引用块 */
+blockquote {
+  font-style: italic;
+  color: var(--muted-foreground);
+  border-left: 2px solid var(--border);
+  padding-left: 1.5rem;
 }
