@@ -1,12 +1,8 @@
-import { Sidebar } from "@/components/sidebar";
 import { Settings, User, Palette, Bell, Shield } from "lucide-react";
 
 export default function SettingsPage() {
   return (
-    <div className="flex min-h-screen w-full">
-      <Sidebar />
-      <main className="flex-1 overflow-y-auto">
-        <div className="min-h-screen">
+    <div className="min-h-screen">
           {/* Header */}
           <header className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b-2 border-foreground">
             <div className="flex items-center gap-3 px-6 py-4 lg:px-8">
@@ -225,8 +221,6 @@ export default function SettingsPage() {
               </section>
             </div>
           </div>
-        </div>
-      </main>
     </div>
   );
 }
