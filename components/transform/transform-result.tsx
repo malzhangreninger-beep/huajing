@@ -10,11 +10,11 @@ interface TransformResultProps {
 
 export function TransformResult({ content, isStreaming }: TransformResultProps) {
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="canvas-card rounded-xl overflow-hidden text-[#2C2620]">
       {/* Header */}
       <div className="flex items-center gap-2 px-5 py-3 border-b border-border bg-secondary/30">
         <Sparkles className="w-4 h-4 text-purple-500" />
-        <span className="text-sm font-medium text-foreground">创作方案</span>
+        <span className="text-base font-medium text-[#2C2620]">创作方案</span>
         {isStreaming && (
           <span className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
@@ -28,17 +28,17 @@ export function TransformResult({ content, isStreaming }: TransformResultProps) 
         <ReactMarkdown
           components={{
             h2: ({ children }) => (
-              <h2 className="text-lg font-semibold text-primary mt-6 mb-3 first:mt-0">
+              <h2 className="text-lg font-semibold text-[#2C2620] mt-6 mb-3 first:mt-0">
                 {children}
               </h2>
             ),
             h3: ({ children }) => (
-              <h3 className="text-base font-medium text-foreground mt-4 mb-2">
+              <h3 className="text-base font-medium text-[#2C2620] mt-4 mb-2">
                 {children}
               </h3>
             ),
             p: ({ children }) => (
-              <p className="text-foreground/90 leading-relaxed mb-3">
+              <p className="text-base text-[#2C2620] leading-relaxed mb-3">
                 {children}
               </p>
             ),
@@ -46,13 +46,13 @@ export function TransformResult({ content, isStreaming }: TransformResultProps) 
               <ul className="space-y-2 mb-4 list-none pl-0">{children}</ul>
             ),
             li: ({ children }) => (
-              <li className="flex gap-2 text-foreground/90">
+              <li className="flex gap-2 text-base text-[#2C2620]">
                 <span className="text-primary mt-1">•</span>
                 <span>{children}</span>
               </li>
             ),
             strong: ({ children }) => (
-              <strong className="font-semibold text-foreground">
+              <strong className="font-semibold text-[#2C2620]">
                 {children}
               </strong>
             ),

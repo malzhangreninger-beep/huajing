@@ -10,24 +10,24 @@ const features = [
     description: "记录每日灵感碎片——看到的、想到的、感受到的。AI 会帮你发现反复出现的母题和意象。",
     icon: BookOpen,
     href: "/journal",
-    color: "from-[#E8E4DC] to-[#E0DCD4]",
-    borderColor: "border-primary/20",
+    color: "canvas-card",
+    borderColor: "border-[#A89E90]",
   },
   {
     title: "灵感转换",
     description: "输入一首诗、一段记忆、一个概念，获得构图建议、色调方案、美术史参考。",
     icon: Sparkles,
     href: "/transform",
-    color: "from-[#E4E0D8] to-[#DCE0D8]",
-    borderColor: "border-stone-300/50",
+    color: "canvas-card",
+    borderColor: "border-[#A89E90]",
   },
   {
     title: "母题画廊",
     description: "AI 分析你的创作日志，识别你的艺术语言、情绪基调、关注的哲学命题。",
     icon: Palette,
     href: "/themes",
-    color: "from-[#E0DCD8] to-[#D8D4CE]",
-    borderColor: "border-border",
+    color: "canvas-card",
+    borderColor: "border-[#A89E90]",
   },
 ];
 
@@ -54,8 +54,8 @@ export function HomeContent() {
       {/* Hero Section */}
       <div className="max-w-4xl mx-auto mb-16 animate-fade-in">
         <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 tracking-tight">
-            欢迎来到<span className="text-primary">画境</span>
+          <h1 className="text-5xl font-bold text-[#2C2620] mb-4 tracking-tight">
+            欢迎来到<span className="text-[#2C2620]">画境</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             一个为艺术创作者服务的 AI 创作伴侣。通过「向内挖掘」和「向外转化」，
@@ -64,10 +64,10 @@ export function HomeContent() {
         </div>
 
         {/* Quote */}
-        <div className="relative bg-card border border-border rounded-2xl p-8 mb-12">
+        <div className="relative canvas-card rounded-2xl p-8 mb-12">
           <Quote className="absolute top-4 left-4 w-8 h-8 text-primary/20" />
           <blockquote className="text-center">
-            <p className="text-xl text-foreground/90 italic mb-4 leading-relaxed">
+            <p className="text-lg text-[#2C2620] italic mb-4 leading-relaxed">
               「{randomQuote.text}」
             </p>
             <cite className="text-sm text-muted-foreground">
@@ -94,7 +94,7 @@ export function HomeContent() {
               >
                 <div
                   className={`
-                    relative h-full bg-gradient-to-br ${feature.color} 
+                    relative h-full ${feature.color}
                     border ${feature.borderColor} rounded-2xl p-6
                     transition-all duration-300
                     hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/5
@@ -106,10 +106,10 @@ export function HomeContent() {
                     </div>
                     <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-[#2C2620] mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-[#4A4238] leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

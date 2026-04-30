@@ -138,7 +138,7 @@ export function ThemesContent() {
             <div className="max-w-4xl mx-auto">
               {/* Stats Overview */}
               <div className="grid gap-4 md:grid-cols-3 mb-8">
-                <div className="bg-card border border-border rounded-xl p-5">
+                <div className="canvas-card rounded-xl p-5">
                   <div className="flex items-center gap-3 mb-3">
                     <BookOpen className="w-5 h-5 text-amber-500" />
                     <span className="text-sm text-muted-foreground">日志记录</span>
@@ -147,7 +147,7 @@ export function ThemesContent() {
                     {mockJournalEntries.length}
                   </p>
                 </div>
-                <div className="bg-card border border-border rounded-xl p-5">
+                <div className="canvas-card rounded-xl p-5">
                   <div className="flex items-center gap-3 mb-3">
                     <Palette className="w-5 h-5 text-purple-500" />
                     <span className="text-sm text-muted-foreground">标签数量</span>
@@ -156,7 +156,7 @@ export function ThemesContent() {
                     {allTags.length}
                   </p>
                 </div>
-                <div className="bg-card border border-border rounded-xl p-5">
+                <div className="canvas-card rounded-xl p-5">
                   <div className="flex items-center gap-3 mb-3">
                     <TrendingUp className="w-5 h-5 text-emerald-500" />
                     <span className="text-sm text-muted-foreground">平均情绪</span>
@@ -171,7 +171,7 @@ export function ThemesContent() {
               </div>
 
               {/* Tag Cloud */}
-              <div className="bg-card border border-border rounded-xl p-6 mb-8">
+              <div className="canvas-card rounded-xl p-6 mb-8">
                 <h3 className="text-sm font-medium text-muted-foreground mb-4">
                   你的关键词云
                 </h3>
@@ -219,7 +219,7 @@ export function ThemesContent() {
                         key={analysis.title}
                         onClick={() => handleQuickAnalysis(analysis.prompt)}
                         disabled={isLoading}
-                        className="flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:border-primary/30 hover:bg-primary/5 transition-all text-left disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-3 p-4 canvas-card rounded-xl hover:border-primary/30 transition-all text-left disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <div className="p-2 rounded-lg bg-primary/10">
                           <Icon className="w-5 h-5 text-primary" />
@@ -234,7 +234,7 @@ export function ThemesContent() {
               </div>
 
               {/* Custom Question */}
-              <div className="bg-card border border-border rounded-xl p-6">
+              <div className="canvas-card rounded-xl p-6">
                 <h3 className="text-sm font-medium text-muted-foreground mb-4">
                   自由提问
                 </h3>
@@ -274,7 +274,7 @@ export function ThemesContent() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {message.role === "user" ? (
-                    <div className="max-w-lg bg-primary/10 border border-primary/30 rounded-xl px-5 py-4">
+                    <div className="max-w-lg canvas-card rounded-xl px-5 py-4">
                       <p className="text-foreground whitespace-pre-wrap">
                         {message.parts
                           ?.filter((p) => p.type === "text")
@@ -283,7 +283,7 @@ export function ThemesContent() {
                       </p>
                     </div>
                   ) : (
-                    <div className="bg-card border border-border rounded-xl overflow-hidden">
+                    <div className="canvas-card rounded-xl overflow-hidden">
                       <div className="flex items-center gap-2 px-5 py-3 border-b border-border bg-secondary/30">
                         <Palette className="w-4 h-4 text-emerald-500" />
                         <span className="text-sm font-medium text-foreground">

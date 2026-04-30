@@ -233,8 +233,8 @@ export function TransformContent() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {message.role === "user" ? (
-                    <div className="max-w-lg bg-primary/10 border border-primary/30 rounded-xl px-5 py-4">
-                      <p className="text-foreground whitespace-pre-wrap">
+                    <div className="max-w-lg canvas-card rounded-xl px-5 py-4">
+                      <p className="text-base text-[#2C2620] whitespace-pre-wrap">
                         {message.content}
                       </p>
                     </div>

@@ -31,7 +31,7 @@ export function JournalEntry({ entry, onDelete }: JournalEntryProps) {
   const firstFeedback = entry.journal_feedbacks?.[0];
 
   return (
-    <article className="group bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300">
+    <article className="group canvas-card rounded-xl p-5 hover:border-primary/30 transition-all duration-300">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-2">
           <time className="text-sm text-muted-foreground">

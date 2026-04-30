@@ -59,7 +59,7 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:sticky top-0 left-0 h-screen w-64 bg-[#E8E4DC] border-r border-r-[#C8C2B8]
+          fixed lg:sticky top-0 left-0 h-screen w-64 bg-[#E8E2D5] border-r border-r-[#C8C2B8]
           flex flex-col z-40 transition-transform duration-300
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
@@ -71,7 +71,7 @@ export function Sidebar() {
               <span className="text-[#F0ECD8] text-xl font-semibold">画</span>
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-[#F0ECD8] transition-colors">
+              <h1 className="text-2xl font-semibold text-[#2C2620] transition-colors">
                 画境
               </h1>
               <p className="text-xs text-[rgba(240,236,216,0.6)]">AI 创作伴侣</p>
@@ -94,14 +94,14 @@ export function Sidebar() {
                   flex items-center gap-3 px-4 py-3 border-l-4 transition-all duration-200
                   ${
                     isActive
-                      ? "border-l-[#8E8478] bg-[rgba(196,132,60,0.15)] text-[#3D3830]"
-                      : "border-l-transparent text-[#7A7268] hover:text-[#F0ECD8]"
+                      ? "border-l-[#8E8478] bg-[rgba(196,132,60,0.15)] text-[#2C2620] font-medium"
+                      : "border-l-transparent text-[#5C5448] hover:text-[#2C2620]"
                   }
                 `}
               >
                 <Icon className="w-5 h-5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-sm truncate">{item.name}</p>
+                  <p className="text-base truncate">{item.name}</p>
                   <p className="text-xs opacity-60 truncate">{item.description}</p>
                 </div>
               </Link>
@@ -118,13 +118,13 @@ export function Sidebar() {
               flex items-center gap-3 px-4 py-3 border-l-4 transition-all duration-200
               ${
                 pathname === "/settings"
-                  ? "border-l-[#8E8478] bg-[rgba(196,132,60,0.15)] text-[#3D3830]"
-                  : "border-l-transparent text-[#7A7268] hover:text-[#F0ECD8]"
+                  ? "border-l-[#8E8478] bg-[rgba(196,132,60,0.15)] text-[#2C2620] font-medium"
+                  : "border-l-transparent text-[#5C5448] hover:text-[#2C2620]"
               }
             `}
           >
             <Settings className="w-5 h-5" />
-            <span className="text-sm font-medium">设置</span>
+            <span className="text-base">设置</span>
           </Link>
         </div>
       </aside>
